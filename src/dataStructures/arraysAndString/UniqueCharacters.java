@@ -10,7 +10,7 @@ public class UniqueCharacters {
 
 	/**
 	 * Return true if the provided string has all unique characters by using an
-	 * array as a filter. Assuming that the input String is in ASCII
+	 * array as a filter. Assuming that the input String is in ASCII. This is similar to a hashing to a table.
 	 * 
 	 * @param input
 	 * @return
@@ -18,6 +18,8 @@ public class UniqueCharacters {
 	public static boolean isUnique(String input) {
 		if (!isASCII(input))
 			throw new IllegalArgumentException("This method only handle input in ASCII format");
+		else if (input.length() > 128)
+			return false;
 		else {
 			boolean[] filter = new boolean[128];
 			for (int i = 0; i < input.length(); i++) {
