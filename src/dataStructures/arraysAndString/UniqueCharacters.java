@@ -10,7 +10,10 @@ public class UniqueCharacters {
 
 	/**
 	 * Return true if the provided string has all unique characters by using an
-	 * array as a filter. Assuming that the input String is in ASCII. This is similar to a hashing to a table.
+	 * array as a filter. Assuming that the input String is in ASCII. This is
+	 * similar to a hashing to a table. The process for an input in Unicode
+	 * format is the same, except that each char takes up 4 byes (65,536
+	 * combinations)
 	 * 
 	 * @param input
 	 * @return
@@ -41,19 +44,19 @@ public class UniqueCharacters {
 		}
 		return isCorrect;
 	}
-	
+
 	public static void test(boolean expected, String input) {
 		try {
 			if (isUnique(input) == expected)
 				System.out.println("Test correct!");
 			else
-				System.out.println(
-						"Incorrect for " + input + "\tExpected: " + expected + "\tActual: " + isUnique(input));
+				System.out
+						.println("Incorrect for " + input + "\tExpected: " + expected + "\tActual: " + isUnique(input));
 		} catch (IllegalArgumentException e) {
 			System.err.println("The input " + input + " is not in ASCII");
 		}
 	}
-	
+
 	public static void main(String[] args) {
 		test(true, "TCU");
 		test(false, "TCC");
