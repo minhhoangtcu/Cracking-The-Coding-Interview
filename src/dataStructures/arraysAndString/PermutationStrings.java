@@ -1,5 +1,6 @@
 package dataStructures.arraysAndString;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
@@ -21,7 +22,7 @@ public class PermutationStrings {
 	 *            the second string
 	 * @return true if a is a permutation of b, false if otherwise
 	 */
-	public static boolean isPermutation(String a, String b) {
+	public static boolean isPermutationHashTable(String a, String b) {
 		if (a.length() != b.length())
 			return false;
 		else {
@@ -58,24 +59,101 @@ public class PermutationStrings {
 			return true;
 		}
 	}
+	
+	public static boolean isPermutationSort(String a, String b) {
+		if (a.length() != b.length())
+			return false;
+		else {
+			return (sort(a).equals(sort(b)));
+		}
+	}
+	
+	public static boolean isPermutationArrayHash(String a, String b) {
+		if (a.length() != b.length())
+			return false;
+		else {
+			byte[] filter = new byte[128];
+			
+			for (int i = 0; i < a.length(); i++) {
+				byte c = (byte) a.charAt(i);
+				filter[c]++;
+			}
+			
+			for (int i = 0; i < b.length(); i++) {
+				byte c = (byte) b.charAt(i);
+				filter[c]--;
+				if (filter[c] < 0)
+					return false;
+			}
+			return true;
+		}
+	}
+	
+	public static String sort(String input) {
+		char[] sorting = input.toCharArray();
+		Arrays.sort(sorting);
+		return new String(sorting);
+	}
 
-	public static void test(boolean expected, String a, String b) {
-		if (isPermutation(a, b) == expected)
+	public static void testHashTable(boolean expected, String a, String b) {
+		if (isPermutationHashTable(a, b) == expected)
 			System.out.println("Test correct!");
 		else
 			System.out.println("Incorrect for " + a + " and " + b + "\tExpected: " + expected + "\tActual: "
-					+ isPermutation(a, b));
+					+ isPermutationHashTable(a, b));
+	}
+	
+	public static void testSort(boolean expected, String a, String b) {
+		if (isPermutationSort(a, b) == expected)
+			System.out.println("Test correct!");
+		else
+			System.out.println("Incorrect for " + a + " and " + b + "\tExpected: " + expected + "\tActual: "
+					+ isPermutationSort(a, b));
+	}
+	
+	public static void testArrayHash(boolean expected, String a, String b) {
+		if (isPermutationArrayHash(a, b) == expected)
+			System.out.println("Test correct!");
+		else
+			System.out.println("Incorrect for " + a + " and " + b + "\tExpected: " + expected + "\tActual: "
+					+ isPermutationArrayHash(a, b));
 	}
 
 	public static void main(String[] args) {
-		test(false, "a", "b");
-		test(true, "a", "a");
-		test(false, "a", "ba");
-		test(true, "aaaa", "aaaa");
-		test(true, "abba", "bbaa");
-		test(true, "to be or not to be", "not to be or be to");
-		test(false, "123", "asd");
-		test(true, "", "");
-		test(true, "12345", "12345");
+		System.out.println("Check hash tables algorithm");
+		testHashTable(false, "a", "b");
+		testHashTable(true, "a", "a");
+		testHashTable(false, "a", "ba");
+		testHashTable(true, "aaaa", "aaaa");
+		testHashTable(true, "abba", "bbaa");
+		testHashTable(true, "to be or not to be", "not to be or be to");
+		testHashTable(false, "123", "asd");
+		testHashTable(true, "", "");
+		testHashTable(true, "12345", "12345");
+		System.out.println();
+		
+		System.out.println("Check sorting algorithm");
+		testSort(false, "a", "b");
+		testSort(true, "a", "a");
+		testSort(false, "a", "ba");
+		testSort(true, "aaaa", "aaaa");
+		testSort(true, "abba", "bbaa");
+		testSort(true, "to be or not to be", "not to be or be to");
+		testSort(false, "123", "asd");
+		testSort(true, "", "");
+		testSort(true, "12345", "12345");
+		System.out.println();
+		
+		System.out.println("Check array hash algorithm");
+		testArrayHash(false, "a", "b");
+		testArrayHash(true, "a", "a");
+		testArrayHash(false, "a", "ba");
+		testArrayHash(true, "aaaa", "aaaa");
+		testArrayHash(true, "abba", "bbaa");
+		testArrayHash(true, "to be or not to be", "not to be or be to");
+		testArrayHash(false, "123", "asd");
+		testArrayHash(true, "", "");
+		testArrayHash(true, "12345", "12345");
+		System.out.println();
 	}
 }
