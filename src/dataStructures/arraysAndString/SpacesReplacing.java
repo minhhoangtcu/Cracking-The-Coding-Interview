@@ -20,17 +20,34 @@ import java.util.Arrays;
 public class SpacesReplacing {
 	
 	public static void main(String[] args) {
-		char[] input = {48,49,50,51,52,53};
-		System.out.println(Arrays.toString(shiftRight(input, 2, 2)));
+		System.out.println(replace("to be or not to be", 18));
+		System.out.println(replace("Mr John Smith    ", 13));
 	}
 	
-	public static String replace(String text) {
+	/**
+	 * Replace all spaces within the String with '%20'.  
+	 * 
+	 * @param text
+	 * @return
+	 */
+	public static String replace(String text, int realLength) {
 		
+		// Trim the array down to its real length
 		char[] charArray = text.toCharArray();
+		charArray = Arrays.copyOf(charArray, realLength);
 		
+		// Find all spaces within the array. Then, extend the array by 3 and replace the missing slots with '%20'
+		for (int i = 0; i < charArray.length; i++) {
+			if(charArray[i] == 32) { // space stands for 32 in ASCII
+				charArray = shiftRight(charArray, 2, i);
+				charArray[i] = 37;
+				charArray[i+1] = 50;
+				charArray[i+2] = 48;
+				i+=2;
+			}
+		}
 		
-		
-		return null;
+		return new String(charArray);
 	}
 	
 	/**
