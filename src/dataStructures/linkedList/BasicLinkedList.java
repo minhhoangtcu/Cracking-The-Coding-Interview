@@ -67,7 +67,7 @@ public class BasicLinkedList {
 
 		BasicNode runner = root;
 		while (runner != null) {
-			sb.append(runner.data + " ");
+			sb.append(runner.data);
 			runner = runner.next;
 		}
 
