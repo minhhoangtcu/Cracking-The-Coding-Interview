@@ -64,64 +64,29 @@ public class Sum {
 		expected = "";
 		System.out.println(String.format("Expected %s \t Actual: %s", expected, actual));
 		
+		System.out.println("\nTest sum normal 2 lists");
+		
+		list1 = sum.getList("5959");
+		list2 = sum.getList("1919");
+		System.out.println(String.format("Expected %s \t Actual: %s", "7878", sum.sumNormal(list1, list2)));
+		
+		list1 = sum.getList("100");
+		list2 = sum.getList("1011");
+		System.out.println(String.format("Expected %s \t Actual: %s", "1111", sum.sumNormal(list1, list2)));
+		
+		list1 = sum.getList("2");
+		list2 = sum.getList("9");
+		System.out.println(String.format("Expected %s \t Actual: %s", "11", sum.sumNormal(list1, list2)));
+		
 	}
 
 	/** Sum up 2 linked list in normal order **/
 	public BasicLinkedList sumNormal(BasicLinkedList firstList, BasicLinkedList secondList) {
-		BasicNode firstListPointer = firstList.root;
-		BasicNode secondListPointer = secondList.root;
-		BasicLinkedList resultingList = new BasicLinkedList();
-		boolean flagEnd = false;
-		int save = 0;
 		
-		while (!flagEnd) {
-			
-			if (firstListPointer == null && secondListPointer != null) {
-				if (save != 0) {
-					int resultingInt = Integer.parseInt(secondListPointer.data) + save;
-					resultingList.addEnd(new BasicNode(resultingInt+""));
-					save = 0;
-				}
-				else
-					resultingList.addEnd(secondListPointer);
-				secondListPointer = secondListPointer.next;
-			}
-			else if (secondListPointer == null && firstListPointer != null) {
-				if (save != 0) {
-					int resultingInt = Integer.parseInt(firstListPointer.data) + save;
-					resultingList.addEnd(new BasicNode(resultingInt+""));
-					save = 0;
-				}
-				else
-					resultingList.addEnd(firstListPointer);
-				firstListPointer = firstListPointer.next;
-			}
-			else if (firstListPointer != null && secondListPointer != null) {
-				int a = Integer.parseInt(firstListPointer.data);
-				int b = Integer.parseInt(secondListPointer.data);
-				
-				int resultingInt = a + b + save;
-				save = 0;
-				if (resultingInt > 9) {
-					save = resultingInt / 10;
-					resultingInt = resultingInt % 10;
-				}
-				
-				resultingList.addEnd(new BasicNode(resultingInt+""));
-				
-				firstListPointer = firstListPointer.next;
-				secondListPointer = secondListPointer.next;
-			}
-			else if (firstListPointer == null && secondListPointer == null && save != 0) {
-				resultingList.addEnd(new BasicNode(save+""));
-				save = 0;
-			}
-			else if (firstListPointer == null && secondListPointer == null && save == 0) {
-				flagEnd = true;
-			}
-		}
+		firstList = reverseList(firstList);
+		secondList = reverseList(secondList);
 		
-		return resultingList;
+		return reverseList(sumReverse(firstList, secondList));
 	}
 	
 	/** Sum up 2 linked list in reverse order **/
