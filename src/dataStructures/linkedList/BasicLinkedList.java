@@ -64,7 +64,7 @@ public class BasicLinkedList {
 
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-
+		
 		BasicNode runner = root;
 		while (runner != null) {
 			sb.append(runner.data);

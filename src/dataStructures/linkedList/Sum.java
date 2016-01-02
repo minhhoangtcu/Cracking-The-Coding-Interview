@@ -50,8 +50,19 @@ public class Sum {
 		list2 = sum.getList("00001");
 		System.out.println(String.format("Expected %s \t Actual: %s", "00011", sum.sumReverse(list1, list2)));
 		
-		System.out.println("Test reverse lists");
-		System.out.println(String.format("Expected %s \t Actual: %s", "4321", sum.reverseList(sum.getList("1234"))));
+		System.out.println("\nTest reverse lists");
+		
+		String actual = sum.reverseList(sum.getList("1234")).toString();
+		String expected = "4321";
+		System.out.println(String.format("Expected %s \t Actual: %s", expected, actual));
+		
+		actual = sum.reverseList(sum.getList("10000")).toString();
+		expected = "00001";
+		System.out.println(String.format("Expected %s \t Actual: %s", expected, actual));
+		
+		actual = sum.reverseList(sum.getList("")).toString();
+		expected = "";
+		System.out.println(String.format("Expected %s \t Actual: %s", expected, actual));
 		
 	}
 
@@ -213,7 +224,7 @@ public class Sum {
 		
 		// Work from the end node, build path
 		while (previous != null) {
-			result.addEnd(previous);
+			result.addEnd(previous.data);
 			previous = backTrack.get(previous);
 		}
 		
