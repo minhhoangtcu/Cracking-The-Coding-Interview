@@ -1,6 +1,7 @@
 package dataStructures.stacksAndQueues;
 
 import java.util.Arrays;
+import java.util.EmptyStackException;
 
 /**
  * Describe how to use a single array to implement three stacks
@@ -18,62 +19,73 @@ public class ArrayForThreeStacks {
 	public static void main(String[] args) {
 		
 		System.out.println("Check for pushing then peeking immediately");
-		ArrayForThreeStacks stacks = new ArrayForThreeStacks();
-		stacks.push(1, "Minh11");
-		System.out.println(stacks.peek(1));
-		stacks.push(1, "Minh12");
-		System.out.println(stacks.peek(1));
-		stacks.push(2, "Minh21");
-		System.out.println(stacks.peek(2));
-		stacks.push(2, "Minh22");
-		System.out.println(stacks.peek(2));
-		stacks.push(3, "Minh31");
-		System.out.println(stacks.peek(3));
-		stacks.push(3, "Minh32");
-		System.out.println(stacks.peek(3));
+		ArrayForThreeStacks peekingStacks = new ArrayForThreeStacks();
+		peekingStacks.push(1, "Minh11");
+		System.out.println(peekingStacks.peek(1));
+		peekingStacks.push(1, "Minh12");
+		System.out.println(peekingStacks.peek(1));
+		peekingStacks.push(2, "Minh21");
+		System.out.println(peekingStacks.peek(2));
+		peekingStacks.push(2, "Minh22");
+		System.out.println(peekingStacks.peek(2));
+		peekingStacks.push(3, "Minh31");
+		System.out.println(peekingStacks.peek(3));
+		peekingStacks.push(3, "Minh32");
+		System.out.println(peekingStacks.peek(3));
 		System.out.println();
 		
 		System.out.println("Check for auto expanding");
-		ArrayForThreeStacks smallStacks = new ArrayForThreeStacks(3);
+		ArrayForThreeStacks autoExpandStacks = new ArrayForThreeStacks(3);
+		autoExpandStacks.push(1, "Minh1");
+		autoExpandStacks.push(1, "Minh2");
+		autoExpandStacks.push(1, "Minh3");
+		autoExpandStacks.push(1, "Minh4");
+		autoExpandStacks.push(1, "Minh5");
+		autoExpandStacks.push(1, "Minh6");
+		autoExpandStacks.push(1, "Minh7");
+		autoExpandStacks.push(1, "Minh8");
+		autoExpandStacks.push(1, "Minh9");
+		autoExpandStacks.push(1, "Minh10");
+		autoExpandStacks.push(1, "Minh11");
+		autoExpandStacks.push(1, "Minh12");
+		autoExpandStacks.push(1, "Minh13");
+		autoExpandStacks.push(1, "Minh14");
+		autoExpandStacks.push(1, "Minh15");
+		autoExpandStacks.push(1, "Minh16");
+		System.out.println(autoExpandStacks.peek(1));
+		
+		autoExpandStacks.push(2, "Minh1");
+		autoExpandStacks.push(2, "Minh2");
+		autoExpandStacks.push(2, "Minh3");
+		autoExpandStacks.push(2, "Minh4");
+		autoExpandStacks.push(2, "Minh5");
+		autoExpandStacks.push(2, "Minh6");
+		System.out.println(autoExpandStacks.peek(2));
+		
+		autoExpandStacks.push(3, "Minh1");
+		autoExpandStacks.push(3, "Minh2");
+		autoExpandStacks.push(3, "Minh3");
+		autoExpandStacks.push(3, "Minh4");
+		autoExpandStacks.push(3, "Minh5");
+		autoExpandStacks.push(3, "Minh6");
+		autoExpandStacks.push(3, "Minh7");
+		autoExpandStacks.push(3, "Minh8");
+		System.out.println(autoExpandStacks.peek(3));
+		
+		System.out.println(autoExpandStacks.peek(1));
+		System.out.println(autoExpandStacks.peek(2));
+		System.out.println(autoExpandStacks.peek(3));
+		System.out.println();
+		
+		System.out.println("Check for elements popping");
+		ArrayForThreeStacks smallStacks = new ArrayForThreeStacks(5);
+		smallStacks.push(1, "Minh1");
+		System.out.println(smallStacks.pop(1));
 		smallStacks.push(1, "Minh1");
 		smallStacks.push(1, "Minh2");
-		smallStacks.push(1, "Minh3");
-		smallStacks.push(1, "Minh4");
-		smallStacks.push(1, "Minh5");
-		smallStacks.push(1, "Minh6");
-		smallStacks.push(1, "Minh7");
-		smallStacks.push(1, "Minh8");
-		smallStacks.push(1, "Minh9");
-		smallStacks.push(1, "Minh10");
-		smallStacks.push(1, "Minh11");
-		smallStacks.push(1, "Minh12");
-		smallStacks.push(1, "Minh13");
-		smallStacks.push(1, "Minh14");
-		smallStacks.push(1, "Minh15");
-		smallStacks.push(1, "Minh16");
-		System.out.println(smallStacks.peek(1));
+		System.out.println(smallStacks.pop(1));
+		System.out.println(smallStacks.pop(1));
 		
-		smallStacks.push(2, "Minh1");
-		smallStacks.push(2, "Minh2");
-		smallStacks.push(2, "Minh3");
-		smallStacks.push(2, "Minh4");
-		smallStacks.push(2, "Minh5");
-		smallStacks.push(2, "Minh6");
-		System.out.println(smallStacks.peek(2));
-		
-		smallStacks.push(3, "Minh1");
-		smallStacks.push(3, "Minh2");
-		smallStacks.push(3, "Minh3");
-		smallStacks.push(3, "Minh4");
-		smallStacks.push(3, "Minh5");
-		smallStacks.push(3, "Minh6");
-		smallStacks.push(3, "Minh7");
-		smallStacks.push(3, "Minh8");
-		System.out.println(smallStacks.peek(3));
-		
-		System.out.println(smallStacks.peek(1));
-		System.out.println(smallStacks.peek(2));
-		System.out.println(smallStacks.peek(3));
 	}
 	
 	public ArrayForThreeStacks(int defaultSize) {
@@ -109,6 +121,21 @@ public class ArrayForThreeStacks {
 		pointers[stackIndex]++;
 		currentSizes[stackIndex]++;
 
+	}
+	
+	public String pop(int stackNum) {
+		int stackIndex = stackNum-1;
+		if (!isValidStackNum(stackNum))
+			throw new IllegalArgumentException("Provided stack number is not valid. Please enter 1, 2 or 3.");
+		else if (isEmpty(stackNum)) {
+			throw new EmptyStackException();
+		}
+		
+		pointers[stackIndex]--;
+		String output = content[pointers[stackIndex]]; 
+		content[pointers[stackIndex]] = null;
+		currentSizes[stackIndex]--;
+		return output;
 	}
 
 	private void expand(int stackNum) {
@@ -156,8 +183,12 @@ public class ArrayForThreeStacks {
 		content = newContent;
 	}
 
-	private boolean isFull(int stackIndex) {
-		return currentSizes[stackIndex-1] == maxSizes[stackIndex-1];
+	private boolean isFull(int stackNum) {
+		return currentSizes[stackNum-1] == maxSizes[stackNum-1];
+	}
+	
+	private boolean isEmpty(int stackNum) {
+		return currentSizes[stackNum-1] == 0;
 	}
 
 	private boolean isValidStackNum(int stackNum) {
