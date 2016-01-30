@@ -15,6 +15,9 @@ public class BasicBitManipulation {
 		byte b = 0b0110_1110;
 		printByte(clearBitsMSBThroughI(b, 3));
 		printByte(clearBitsIThrough0(b, 3));
+		printByte(updateBit(b, false, 3));
+		printByte(updateBit(b, true, 0));
+		
 	}
 	
 	static byte setBit(byte num, int i) {
@@ -40,6 +43,11 @@ public class BasicBitManipulation {
 	static byte clearBitsIThrough0(byte num, int i) {
 		byte mask = (byte) (-1 << (i+1));
 		return (byte) (num & mask);
+	}
+	
+	static byte updateBit(byte num, boolean bit, int i) {
+		num = clearBit(num, i);
+		return (byte) (num | ((bit ? 0b01 : 0b00) << i));
 	}
 
 	static void printByte(byte num) {
