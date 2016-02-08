@@ -8,12 +8,12 @@ public class QuickFind {
 	public static void main(String[] args) {
 		
 		QuickFind uf = new QuickFind(10);
-		uf.union(9, 0);
-		uf.union(9, 4);
-		uf.union(8, 7);
-		uf.union(7, 6);
-		uf.union(9, 2);
-		uf.union(2, 3);
+		uf.union(4, 7);
+		uf.union(9, 8);
+		uf.union(0, 9);
+		uf.union(8, 6);
+		uf.union(5, 3);
+		uf.union(9, 5);
 		uf.printSites();
 		
 	}
