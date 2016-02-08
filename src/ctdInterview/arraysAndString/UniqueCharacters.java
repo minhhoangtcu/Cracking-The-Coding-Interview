@@ -1,4 +1,4 @@
-package dataStructures.arraysAndString;
+package ctdInterview.arraysAndString;
 
 /**
  * An algorithm to determine if a string has all unique characters without
@@ -66,6 +66,6 @@ public class UniqueCharacters {
 		test(false, "  ");
 		test(true, "");
 		test(true, "!@#$%^&*()-=");
-		test(false, "ğŒ¼ğŒ°ğŒ²");
+		test(false, "ğ?Œ¼ğ?Œ°ğ?Œ²");
 	}
 }
