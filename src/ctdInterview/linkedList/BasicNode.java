@@ -1,4 +1,4 @@
-package dataStructures.linkedList;
+package ctdInterview.linkedList;
 
 public class BasicNode {
 

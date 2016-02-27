@@ -1,4 +1,4 @@
-package dataStructures.arraysAndString;
+package ctdInterview.arraysAndString;
 
 import java.util.Arrays;
 
