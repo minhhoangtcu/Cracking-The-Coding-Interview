@@ -18,6 +18,10 @@ public class LinkedListFromTreeDepthCreator {
 		
 	}
 
+	/*
+	 * This algorithm actually does not need level-order transversal.
+	 * A breath-first or depth-first way is sufficient because we always keep track of the linked list.
+	 */
 	public static LinkedList<LinkedList<Node>> create(Tree tree) {
 		
 		Queue<Node> listOfNodesToExploreInCurrentOrder = new LinkedList<>();
