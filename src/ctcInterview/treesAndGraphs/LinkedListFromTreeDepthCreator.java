@@ -16,11 +16,42 @@ public class LinkedListFromTreeDepthCreator {
 		Tree tree = creator.createBalancedTree(in1);
 		printDebug(create(tree));
 		
+		printDebug(createByBFS(tree));
+		
+		int[] in2 = {1, 2, 3};
+		Tree tree2 = creator.createBalancedTree(in2);
+		printDebug(createByBFS(tree2));
 	}
 
 	/*
-	 * This algorithm actually does not need level-order transversal.
-	 * A breath-first or depth-first way is sufficient because we always keep track of the linked list.
+	 * Depth-first search
+	 */
+	public static LinkedList<LinkedList<Node>> createByBFS(Tree tree) {
+		
+		LinkedList<LinkedList<Node>> set = new LinkedList<>();
+		
+		addNode(set, tree.root, 0);
+		
+		return set;
+	}
+	
+	private static void addNode(LinkedList<LinkedList<Node>> set, Node node, int level) {
+		
+		if (node == null)
+			return;
+		
+		if (set.size()-1 <= level)
+			set.add(new LinkedList<Node>());
+		
+		addNode(set, node.left, level+1);
+		set.get(level).add(node);
+		addNode(set, node.right, level+1);
+		
+	}
+	
+	/*
+	 * This algorithm actually does not need level-order (breadth-first search) traversal.
+	 * A depth-first (pre-order) way is sufficient because we always keep track of the linked list.
 	 */
 	public static LinkedList<LinkedList<Node>> create(Tree tree) {
 		

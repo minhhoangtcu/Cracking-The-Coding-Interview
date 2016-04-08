@@ -65,8 +65,8 @@ public class BinaryTreeChecker {
 	 * This method will do it iteratively, because we need to keep track of the most recent visited node.
 	 * Although, such node can be store with a static variable, we should avoid this.
 	 * 
-	 * Space: 
-	 * Speed: N
+	 * Space: O(d) for d be the depth of the tree
+	 * Speed: O(N)
 	 */
 	public static boolean isBinaryTree(Tree tree) {
 		/*
