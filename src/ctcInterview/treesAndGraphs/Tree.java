@@ -30,6 +30,7 @@ public class Tree {
 					else {
 						if (isDebug) System.out.printf("Added %d to right of %d\n", id, runner.id);
 						runner.right = new Node(id);
+						runner.right.parent = runner;
 						break;
 					}
 
@@ -39,6 +40,7 @@ public class Tree {
 					else {
 						if (isDebug) System.out.printf("Added %d to left of %d\n", id, runner.id);
 						runner.left = new Node(id);
+						runner.left.parent = runner;
 						break;
 					}
 
