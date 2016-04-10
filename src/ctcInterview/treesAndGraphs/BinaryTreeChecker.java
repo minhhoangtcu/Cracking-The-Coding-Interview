@@ -96,15 +96,11 @@ public class BinaryTreeChecker {
 		if (node.id <= min || node.id > max)
 			return false;
 		
-		// Check left
-		if (!isBinarySubTreeMinMax(node.left, min, node.id))
+		// Check left + right
+		if (!isBinarySubTreeMinMax(node.left, min, node.id) || !isBinarySubTreeMinMax(node.right, node.id, max))
 			return false;
-		
-		// Check right
-		if (!isBinarySubTreeMinMax(node.right, node.id, max))
-			return false;
-		
-		return true;
+		else		
+			return true;
 	}
 	
 	/**
