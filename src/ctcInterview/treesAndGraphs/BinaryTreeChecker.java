@@ -10,19 +10,24 @@ public class BinaryTreeChecker {
 
 	public static void main(String[] args) {
 
+		System.out.println("<<< TEST BALANCED TREE >>>");
 		int[] in1 = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 		BalancedTreeCreator creator = new BalancedTreeCreator();
 		Tree treeBalanced = creator.createBalancedTree(in1);
 		System.out.println(isBinaryTree(treeBalanced));
 		System.out.println(isBinaryTreeRecursively(treeBalanced));
+		System.out.println(isBinaryTreeMinMax(treeBalanced));
 
+		System.out.println("<<< TEST NOT BINARY TREE WITH 3 NODES >>>");
 		Tree tree = new Tree();
 		tree.root = new Node(5);
 		tree.root.left = new Node(10);
 		tree.root.right = new Node(15);
 		System.out.println(isBinaryTree(tree));
 		System.out.println(isBinaryTreeRecursively(tree));
+		System.out.println(isBinaryTreeMinMax(tree));
 
+		System.out.println("<<< TEST NOT BINARY TREE WITH 5 NODES >>>");
 		Tree tree2 = new Tree();
 		tree2.root = new Node(5);
 		tree2.root.left = new Node(3);
@@ -31,7 +36,20 @@ public class BinaryTreeChecker {
 		tree2.root.right = new Node(15);
 		System.out.println(isBinaryTree(tree2));
 		System.out.println(isBinaryTreeRecursively(tree2));
-
+		System.out.println(isBinaryTreeMinMax(tree2));
+		
+		System.out.println("<<< TEST NULL TREE >>>");
+		Tree treeNull = null;
+		System.out.println(isBinaryTree(treeNull));
+		System.out.println(isBinaryTreeRecursively(treeNull));
+		System.out.println(isBinaryTreeMinMax(treeNull));
+		
+		System.out.println("<<< TEST BINARY TREE 1 NODE >>>");
+		Tree treeOneNode = new Tree();
+		treeOneNode.root = new Node(5);
+		System.out.println(isBinaryTree(treeOneNode));
+		System.out.println(isBinaryTreeRecursively(treeOneNode));
+		System.out.println(isBinaryTreeMinMax(treeOneNode));
 	}
 
 	public static void printInOrder(Tree tree) {
@@ -63,6 +81,32 @@ public class BinaryTreeChecker {
 		System.out.println("\n-- Finished printing");
 	}
 
+	public static boolean isBinaryTreeMinMax(Tree tree) {
+		if (tree == null)
+			return false;
+			
+		return isBinarySubTreeMinMax(tree.root, Integer.MIN_VALUE, Integer.MAX_VALUE);
+	}
+	
+	public static boolean isBinarySubTreeMinMax(Node node, int min, int max) {
+
+		if (node == null)
+			return true;
+		
+		if (node.id <= min || node.id > max)
+			return false;
+		
+		// Check left
+		if (!isBinarySubTreeMinMax(node.left, min, node.id))
+			return false;
+		
+		// Check right
+		if (!isBinarySubTreeMinMax(node.right, node.id, max))
+			return false;
+		
+		return true;
+	}
+	
 	/**
 	 * Check for binary tree in in-order traversal. This method will do it
 	 * recursively by keeping track of the address to the last number visited.
@@ -71,7 +115,9 @@ public class BinaryTreeChecker {
 	 * @return
 	 */
 	public static boolean isBinaryTreeRecursively(Tree tree) {
-
+		if (tree == null)
+			return false;
+		
 		Node lastNode = new Node(-1); // -1 as there is nothing in the node.
 										// This will never act weird because it
 										// will have the value of the left-most
@@ -117,6 +163,9 @@ public class BinaryTreeChecker {
 		 * node into the stack like in (1) then repeat.
 		 */
 
+		if (tree == null)
+			return false;
+		
 		Stack<Node> stack = new Stack<>();
 
 		Node lastVisited = null;
