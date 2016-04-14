@@ -62,7 +62,7 @@ public class BalancedTreeCreator {
 	 */
 	public Tree createBalancedTree(int[] elements) {
 		
-		Tree tree = new Tree(true);
+		Tree tree = new Tree(false);
 		
 		int start = 0;
 		int end = elements.length-1;
