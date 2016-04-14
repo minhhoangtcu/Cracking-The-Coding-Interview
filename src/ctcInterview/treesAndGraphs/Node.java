@@ -6,6 +6,7 @@ public class Node {
 	Node left;
 	Node right;
 	Node parent;
+	boolean isAncestor;
 
 	public Node(int id) {
 		this.id = id;

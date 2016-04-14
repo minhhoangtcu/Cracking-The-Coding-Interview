@@ -30,6 +30,7 @@ public class CommonAncestor {
 		BalancedTreeCreator creator = new BalancedTreeCreator();
 		Tree treeBalanced = creator.createBalancedTree(in1);
 		LevelOrderPrint.printLevels(treeBalanced);
+		System.out.println("<<< COMMON ANCESTOR - DEFAULT >>>");
 		System.out.printf("Common ancestor of %d and %d is %d\n", first = 1, second = 9,
 				findCommonAncestor(treeBalanced, first, second).id);
 		System.out.printf("Common ancestor of %d and %d is %d\n", first = 1, second = 3,
@@ -40,6 +41,73 @@ public class CommonAncestor {
 				findCommonAncestor(treeBalanced, first, second).id);
 		System.out.printf("Common ancestor of %d and %d is %d\n", first = 6, second = 5,
 				findCommonAncestor(treeBalanced, first, second).id);
+		
+		System.out.println("<<< COMMON ANCESTOR - IMPROVED >>>");
+		System.out.printf("Common ancestor of %d and %d is %d\n", first = 1, second = 9,
+				findCommonAncestorImproved(treeBalanced, first, second).id);
+		System.out.printf("Common ancestor of %d and %d is %d\n", first = 1, second = 3,
+				findCommonAncestorImproved(treeBalanced, first, second).id);
+		System.out.printf("Common ancestor of %d and %d is %d\n", first = 1, second = 4,
+				findCommonAncestorImproved(treeBalanced, first, second).id);
+		System.out.printf("Common ancestor of %d and %d is %d\n", first = 8, second = 2,
+				findCommonAncestorImproved(treeBalanced, first, second).id);
+		System.out.printf("Common ancestor of %d and %d is %d\n", first = 6, second = 5,
+				findCommonAncestorImproved(treeBalanced, first, second).id);
+		System.out.printf("Common ancestor of %d and %d is %d\n", first = 6, second = 99,
+				findCommonAncestorImproved(treeBalanced, first, second).id);
+	}
+
+	/**
+	 * <p>
+	 * Find the nearest common ancestor of two given nodes by recursively
+	 * traverse the graph and return the two provided node. We check the return
+	 * node from both the left sub-tree and right sub-tree of a given node, if
+	 * both are the nodes we are looking for, then the root has to be their
+	 * nearest ancestor.
+	 * </p>
+	 * 
+	 * @param tree
+	 * @param first
+	 * @param second
+	 * @return
+	 */
+	public static Node findCommonAncestorImproved(Tree tree, int first, int second) {
+		Node out;
+		if ((out = findCommonAncestorImprovedHelper(tree.root, first, second)) != null && out.isAncestor)
+			return out;
+		else
+			return new Node(-1); // For the sake of easy debugging, just print out -1
+	}
+	
+	private static Node findCommonAncestorImprovedHelper(Node root, int first, int second) {
+		if (root == null)
+			return null;
+		
+		// Found either the first or second node
+		if (root.id == first || root.id == second)
+			return root;
+		
+		// Find first, if we already found an ancestor, return it right up
+		Node firstNode = findCommonAncestorImprovedHelper(root.left, first, second);
+		if (firstNode != null && firstNode.isAncestor)
+			return firstNode;
+		
+		// Find second, if we already found an ancestor, return it right up		
+		Node secondNode = findCommonAncestorImprovedHelper(root.right, first, second);
+		if (secondNode != null && secondNode.isAncestor)
+			return secondNode;
+		
+		// If the last check cannot find ancestor, they have to be the nodes that we are looking for or nothing at all
+		if (firstNode != null && secondNode == null)
+			return firstNode;
+		else if (firstNode == null && secondNode != null)
+			return secondNode;
+		else if (firstNode != null && secondNode != null) {
+			root.isAncestor = true;
+			return root; // If we find both the first on left and second on right, then the root has to be an ancestor
+		}
+		else
+			return null;
 	}
 
 	/**
