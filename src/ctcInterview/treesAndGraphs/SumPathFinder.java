@@ -23,6 +23,13 @@ public class SumPathFinder {
 
 	}
 
+	/**
+	 * This algorithm is very ineffective and non-functional. A better way is
+	 * step to each node and look back to see if it add up to sum or not
+	 * 
+	 * @param tree
+	 * @param sum
+	 */
 	public static void printPath(Tree tree, int sum) {
 		for (LinkedList<Node> path : findPath(new LinkedList<>(), new LinkedList<>(), tree.root, sum, sum)) {
 
