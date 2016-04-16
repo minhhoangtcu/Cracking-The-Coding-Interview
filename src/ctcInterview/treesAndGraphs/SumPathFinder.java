@@ -47,7 +47,7 @@ public class SumPathFinder {
 			LinkedList<Node> currentPath, Node node, int sum, int sub) {
 
 		if (node == null)
-			return allPaths;
+			return new LinkedList<>(); // empty
 
 		if (node.id < sum) {
 			// Every time we find a node that is smaller than sum, it can be the
@@ -75,9 +75,11 @@ public class SumPathFinder {
 							findPath(allPaths, (LinkedList<Node>) currentPath.clone(), node.left, sum, sub - node.id));
 					allPaths.addAll(
 							findPath(allPaths, (LinkedList<Node>) currentPath.clone(), node.right, sum, sub - node.id));
+				} else {
+					// If node > sub, the current path failed to be a valid one.
+					// Thus, we do not need to do anything with this case
+					return new LinkedList<>(); // empty
 				}
-				// If node > sub, the current path failed to be a valid one.
-				// Thus, we do not need to do anything with this case
 			}
 
 		} else {
