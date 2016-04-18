@@ -28,7 +28,7 @@ public class TG43_BalancedTreeCreator {
 	
 	public Tree createBalancedTreeRecursiveNode(int[] elements) {
 		
-		Tree tree = new Tree(true);
+		Tree tree = new Tree(false);
 		
 		int start = 0;
 		int end = elements.length-1;
