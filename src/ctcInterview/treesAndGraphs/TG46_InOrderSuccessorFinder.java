@@ -4,13 +4,15 @@ package ctcInterview.treesAndGraphs;
  * Write an algorithm to find the 'next' node (i.e., in-order successor) of a
  * given node in a binary search tree. You may assume that each node has a link
  * to its parent.
+ * 
+ * 4.6
  */
-public class InOrderSuccessorFinder {
+public class TG46_InOrderSuccessorFinder {
 
 	public static void main(String[] args) {
 
 		int[] in1 = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
-		BalancedTreeCreator creator = new BalancedTreeCreator();
+		TG43_BalancedTreeCreator creator = new TG43_BalancedTreeCreator();
 
 		Tree tree = creator.createBalancedTree(in1);
 		LevelOrderPrint.printLevels(tree);

@@ -13,11 +13,11 @@ package ctdInterview.linkedList;
  * @author Minh Hoang
  *
  */
-public class RemoveMiddle {
+public class LL23_RemoveMiddle {
 
 	public static void main(String[] args) {
 		
-		RemoveMiddle removal = new RemoveMiddle();
+		LL23_RemoveMiddle removal = new LL23_RemoveMiddle();
 		LinkedList list = removal.new LinkedList();
 		
 		list.add("F");

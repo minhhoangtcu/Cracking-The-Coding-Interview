@@ -10,11 +10,11 @@ import java.util.Stack;
  * @author Minh
  *
  */
-public class StackMinConstantTime extends Stack<Node> {
+public class SQ32_StackMinConstantTime extends Stack<Node> {
 	
 	public static void main(String[] args) {
 		
-		StackMinConstantTime stack = new StackMinConstantTime();
+		SQ32_StackMinConstantTime stack = new SQ32_StackMinConstantTime();
 		stack.push(new Node(5));
 		stack.push(new Node(10));
 		stack.push(new Node(1));
@@ -36,7 +36,7 @@ public class StackMinConstantTime extends Stack<Node> {
 
 	Stack<Node> minimums;
 	
-	public StackMinConstantTime() {
+	public SQ32_StackMinConstantTime() {
 		minimums = new Stack<Node>();
 	}
 	

@@ -11,11 +11,11 @@ import java.util.List;
  * @author Minh Hoang
  *
  */
-public class FindLastElements {
+public class LL22_FindLastElements {
 
 	public static void main(String[] args) {
 
-		FindLastElements find = new FindLastElements();
+		LL22_FindLastElements find = new LL22_FindLastElements();
 		List<Node> input = new LinkedList<>();
 		input.add(find.new Node("A"));
 		input.add(find.new Node("B"));

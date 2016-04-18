@@ -9,7 +9,7 @@ import java.util.EmptyStackException;
  * @author Minh Hoang
  *
  */
-public class ArrayForThreeStacks {
+public class SQ31_ArrayForThreeStacks {
 
 	int[] maxSizes;
 	int[] currentSizes;
@@ -19,7 +19,7 @@ public class ArrayForThreeStacks {
 	public static void main(String[] args) {
 		
 		System.out.println("Check for pushing then peeking immediately");
-		ArrayForThreeStacks peekingStacks = new ArrayForThreeStacks();
+		SQ31_ArrayForThreeStacks peekingStacks = new SQ31_ArrayForThreeStacks();
 		peekingStacks.push(1, "Minh11");
 		System.out.println(peekingStacks.peek(1));
 		peekingStacks.push(1, "Minh12");
@@ -35,7 +35,7 @@ public class ArrayForThreeStacks {
 		System.out.println();
 		
 		System.out.println("Check for auto expanding");
-		ArrayForThreeStacks autoExpandStacks = new ArrayForThreeStacks(3);
+		SQ31_ArrayForThreeStacks autoExpandStacks = new SQ31_ArrayForThreeStacks(3);
 		autoExpandStacks.push(1, "Minh1");
 		autoExpandStacks.push(1, "Minh2");
 		autoExpandStacks.push(1, "Minh3");
@@ -78,7 +78,7 @@ public class ArrayForThreeStacks {
 		System.out.println();
 		
 		System.out.println("Check for elements popping");
-		ArrayForThreeStacks smallStacks = new ArrayForThreeStacks(5);
+		SQ31_ArrayForThreeStacks smallStacks = new SQ31_ArrayForThreeStacks(5);
 		smallStacks.push(1, "Minh1");
 		System.out.println(smallStacks.pop(1));
 		smallStacks.push(1, "Minh1");
@@ -88,7 +88,7 @@ public class ArrayForThreeStacks {
 		
 	}
 	
-	public ArrayForThreeStacks(int defaultSize) {
+	public SQ31_ArrayForThreeStacks(int defaultSize) {
 		maxSizes = new int[3];
 		currentSizes = new int[3];
 		pointers = new int[3];
@@ -99,7 +99,7 @@ public class ArrayForThreeStacks {
 		}
 	}
 
-	public ArrayForThreeStacks() {
+	public SQ31_ArrayForThreeStacks() {
 		this(10);
 	}
 	

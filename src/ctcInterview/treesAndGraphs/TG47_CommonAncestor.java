@@ -15,10 +15,12 @@ import java.util.Queue;
  * latter one.
  * </p>
  * 
+ * 4.7
+ * 
  * @author minhhoang
  *
  */
-public class CommonAncestor {
+public class TG47_CommonAncestor {
 
 	public static void main(String[] args) {
 
@@ -27,7 +29,7 @@ public class CommonAncestor {
 
 		System.out.println("<<< TEST BALANCED TREE >>>");
 		int[] in1 = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-		BalancedTreeCreator creator = new BalancedTreeCreator();
+		TG43_BalancedTreeCreator creator = new TG43_BalancedTreeCreator();
 		Tree treeBalanced = creator.createBalancedTree(in1);
 		LevelOrderPrint.printLevels(treeBalanced);
 		System.out.printf("Common ancestor of %d and %d is %d\n", first = 1, second = 9,

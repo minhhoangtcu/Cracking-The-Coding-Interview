@@ -22,11 +22,11 @@ import java.util.HashMap;
  * @author Minh Hoang
  *
  */
-public class Sum {
+public class LL25_Sum {
 	
 	public static void main(String[] args) {
 		
-		Sum sum = new Sum();
+		LL25_Sum sum = new LL25_Sum();
 		
 		System.out.println("Test sum lists reverse");
 		

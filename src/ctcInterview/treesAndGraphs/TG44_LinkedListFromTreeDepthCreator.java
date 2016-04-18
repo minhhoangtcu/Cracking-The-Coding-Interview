@@ -7,13 +7,15 @@ import java.util.Queue;
  * Given a binary tree, design an algorithm which creates a linked list of all
  * the nodes at each depth (e.g., if you have a tree with depth D, you'll have D
  * linked lists)
+ * 
+ * 4.4
  */
-public class LinkedListFromTreeDepthCreator {
+public class TG44_LinkedListFromTreeDepthCreator {
 
 	public static void main(String[] args) {
 
 		int[] in1 = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-		BalancedTreeCreator creator = new BalancedTreeCreator();
+		TG43_BalancedTreeCreator creator = new TG43_BalancedTreeCreator();
 		Tree tree = creator.createBalancedTree(in1);
 		printDebug(create(tree));
 

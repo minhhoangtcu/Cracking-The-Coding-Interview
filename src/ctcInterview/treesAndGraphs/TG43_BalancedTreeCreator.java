@@ -1,15 +1,17 @@
 package ctcInterview.treesAndGraphs;
 
-/*
+/**
  * Given a sorted ascendingly array with unique integer elements, 
  * write an algorithm to create a binary search tree with minimal height.
+ * 
+ * 4.3
  */
-public class BalancedTreeCreator {
+public class TG43_BalancedTreeCreator {
 	
 	public static void main(String[] args) {
 		
 		int[] in1 = {1, 2, 3, 4, 5, 6};
-		BalancedTreeCreator creator = new BalancedTreeCreator();
+		TG43_BalancedTreeCreator creator = new TG43_BalancedTreeCreator();
 		
 		LevelOrderPrint.printLevels(creator.createBalancedTree(in1));
 		

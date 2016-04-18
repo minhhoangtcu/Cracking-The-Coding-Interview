@@ -6,7 +6,7 @@ package ctdInterview.arraysAndString;
  * 
  * @author Minh Hoang
  */
-public class UniqueCharacters {
+public class AS11_UniqueCharacters {
 
 	/**
 	 * Return true if the provided string has all unique characters by using an
@@ -66,6 +66,6 @@ public class UniqueCharacters {
 		test(false, "  ");
 		test(true, "");
 		test(true, "!@#$%^&*()-=");
-		test(false, "ð?Œ¼ð?Œ°ð?Œ²");
+		test(false, "ï¿½?ï¿½ï¿½ï¿½?ï¿½ï¿½ï¿½?ï¿½ï¿½");
 	}
 }

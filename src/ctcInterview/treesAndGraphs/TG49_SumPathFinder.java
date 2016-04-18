@@ -8,10 +8,12 @@ import java.util.LinkedList;
  * need to start or end at the root or a leaf, but it must go in a straight line
  * down
  * 
+ * 4.9
+ * 
  * @author minhhoang
  *
  */
-public class SumPathFinder {
+public class TG49_SumPathFinder {
 
 	public static void main(String[] args) {
 

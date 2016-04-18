@@ -3,16 +3,18 @@ package ctcInterview.treesAndGraphs;
 import java.util.ArrayList;
 import java.util.Stack;
 
-/*
+/**
  * Check for binary tree
+ * 
+ * 4.5
  */
-public class BinaryTreeChecker {
+public class TG45_BinaryTreeChecker {
 
 	public static void main(String[] args) {
 
 		System.out.println("<<< TEST BALANCED TREE >>>");
 		int[] in1 = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-		BalancedTreeCreator creator = new BalancedTreeCreator();
+		TG43_BalancedTreeCreator creator = new TG43_BalancedTreeCreator();
 		Tree treeBalanced = creator.createBalancedTree(in1);
 		System.out.println(isBinaryTree(treeBalanced));
 		System.out.println(isBinaryTreeRecursively(treeBalanced));
