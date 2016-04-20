@@ -50,6 +50,15 @@ public class Tree {
 		}
 		size++;
 	}
+	
+	public int getDepth() {
+		return getDepthHelper(root);
+	}
+	
+	public int getDepthHelper(Node node) {
+		if (node == null) return 0;
+		return Math.max(getDepthHelper(node.left), getDepthHelper(node.right)) + 1;
+	}
 
 	public boolean isEmpty() {
 		return size == 0;

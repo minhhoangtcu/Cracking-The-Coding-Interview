@@ -20,9 +20,61 @@ public class TG49_SumPathFinder {
 		Tree tree = new Tree();
 		tree.root = new Node(3);
 		tree.root.left = new Node(2);
+		tree.root.left.left = new Node(1);
+		tree.root.left.left.left = new Node(-1);
+		tree.root.left.right = new Node(3);
 		tree.root.right = new Node(5);
-		printPath(tree, 5);
+		tree.root.right.right = new Node(0);
+		tree.root.right.right.right = new Node(-3);
+		printPathBotUp(tree, 5);
 
+	}
+
+	/**
+	 * The start can start anywhere with in the tree. Thus, we must check every
+	 * node because it can possibly be the beginning of a path. However, getting
+	 * the beginning of a path and then recursively check down requires a lot of
+	 * space and even performance time. It is best to check for the end of a
+	 * path and go from bot to top.
+	 */
+	public static void printPathBotUp(Tree tree, int sum) {
+		int depth = tree.getDepth();
+		int[] path = new int[depth];
+		
+		System.out.println("<<< STARTED FINDING ALL PATH >>>");
+		findSum(tree.root, 0, path, sum);
+		System.out.println("<<< FINISHED FINDING ALL PATH >>>");
+	}
+	
+	public static void findSum(Node node, int depth, int[] path, int sum) {
+		
+		if (node == null)
+			return;
+		
+		path[depth] = node.id;
+		
+		// Check bottom up for a path
+		int sumPath = 0;
+		for (int i = depth; i >= 0; i--) {
+			sumPath += path[i];
+			if (sumPath == sum)
+				printPath(path, i, depth); // we still keep going up because the next 2 nodes may be -1 then 1, which still sum up to correct path.
+		}
+		
+		// Go to its children and check again
+		findSum(node.left, depth+1, path, sum);
+		findSum(node.right, depth+1, path, sum);
+		
+		// Clean up this depth after all children is done
+		path[depth] = Integer.MIN_VALUE;
+	}
+	
+	private static void printPath(int[] path, int start, int end) {
+		System.out.printf("Path: ");
+		for (int i = start; i <= end; i++) {
+			System.out.printf("%d ", path[i]);
+		}
+		System.out.println();
 	}
 
 	/**
@@ -32,7 +84,7 @@ public class TG49_SumPathFinder {
 	 * @param tree
 	 * @param sum
 	 */
-	public static void printPath(Tree tree, int sum) {
+	public static void printPathTopDown(Tree tree, int sum) {
 		for (LinkedList<Node> path : findPath(new LinkedList<>(), new LinkedList<>(), tree.root, sum, sum)) {
 
 			for (Node node : path) {
