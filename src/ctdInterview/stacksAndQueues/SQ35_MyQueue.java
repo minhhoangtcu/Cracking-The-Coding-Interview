@@ -9,11 +9,11 @@ import java.util.Stack;
  * @author Minh
  *
  */
-public class MyQueue {
+public class SQ35_MyQueue {
 
 	public static void main(String[] args) {
 		
-		MyQueue queue = new MyQueue();
+		SQ35_MyQueue queue = new SQ35_MyQueue();
 		
 		queue.enqueue("A");
 		queue.enqueue("B");
@@ -40,7 +40,7 @@ public class MyQueue {
 	Stack<String> stackNewest;
 	int size;
 	
-	public MyQueue() {
+	public SQ35_MyQueue() {
 		stackOldest = new Stack<>();
 		stackNewest = new Stack<>();
 		size = 0;

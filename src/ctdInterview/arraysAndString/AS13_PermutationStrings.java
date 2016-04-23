@@ -10,7 +10,7 @@ import java.util.Map.Entry;
  * @author Minh Hoang
  *
  */
-public class PermutationStrings {
+public class AS13_PermutationStrings {
 
 	/**
 	 * Return true if a string is a permutation of another. This method assumes

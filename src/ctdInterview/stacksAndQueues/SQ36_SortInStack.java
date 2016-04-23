@@ -12,7 +12,7 @@ import java.util.Stack;
  * @author Minh
  *
  */
-public class SortInStack {
+public class SQ36_SortInStack {
 
 	public static void main(String[] args) {
 
@@ -23,7 +23,7 @@ public class SortInStack {
 		input.push(6);
 		input.push(5);
 		input.push(3);
-		Stack<Integer> output = SortInStack.sort(input);
+		Stack<Integer> output = SQ36_SortInStack.sort(input);
 		System.out.println(output.pop());
 		System.out.println(Arrays.toString(output.toArray()));
 		
@@ -38,7 +38,7 @@ public class SortInStack {
 		input.push(2);
 		input.push(4);
 		input.push(5);
-		output = SortInStack.sort(input);
+		output = SQ36_SortInStack.sort(input);
 		System.out.println(output.pop());
 		System.out.println(Arrays.toString(output.toArray()));
 	}

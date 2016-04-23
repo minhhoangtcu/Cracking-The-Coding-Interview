@@ -15,13 +15,13 @@ package ctdInterview.linkedList;
  * @author Minh
  *
  */
-public class DuplicatesRemoval {
+public class LL21_DuplicatesRemoval {
 
 	public static void main(String[] args) {
 
 		// Test the list
 		System.out.println("List test");
-		DuplicatesRemoval removal = new DuplicatesRemoval();
+		LL21_DuplicatesRemoval removal = new LL21_DuplicatesRemoval();
 		LinkedList list = removal.new LinkedList();
 		list.add("C");
 		list.add("B");

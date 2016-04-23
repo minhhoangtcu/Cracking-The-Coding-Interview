@@ -12,7 +12,7 @@ import java.util.Scanner;
  * @author Minh
  *
  */
-public class Compression {
+public class AS15_Compression {
 	
 	public static void main(String[] args) {
 		

@@ -7,11 +7,11 @@ import java.util.Queue;
 /*
  * An animal shelter holds only dogs and cats, and operates on a strictly "first in, first out" basis. People must adopt either the "oldest" (based on arrival time) of all animal at the shelter, or they can slect whether they would perfer a dog or a cat (and will receive the oldest animal of that type). They cannot select which specific animal they would like. Create the data structures to maintain this system and implement operations such as enqueue, dequeueAny, dequeueDog and dequeueCat. You may use the built-in LinkedList data structure.
  */
-public class AnimalShelter {
+public class SQ37_AnimalShelter {
 	
 	public static void main(String[] args) {
 		
-		AnimalShelter shelter = new AnimalShelter();
+		SQ37_AnimalShelter shelter = new SQ37_AnimalShelter();
 		shelter.enqueue(shelter.new Cat("Miku"));
 		shelter.enqueue(shelter.new Cat("Musty"));
 		shelter.enqueue(shelter.new Dog("Husky"));
@@ -35,7 +35,7 @@ public class AnimalShelter {
 	Queue<Cat> cats;
 	int order;
 	
-	public AnimalShelter() {
+	public SQ37_AnimalShelter() {
 		order = 0;
 		dogs = new LinkedList<>();
 		cats = new LinkedList<>();

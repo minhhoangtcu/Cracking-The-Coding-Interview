@@ -8,11 +8,11 @@ package ctdInterview.linkedList;
  * @author Minh Hoang
  *
  */
-public class PartitionNode {
+public class LL24_PartitionNode {
 
 	public static void main(String[] args) {
 		
-		PartitionNode partition = new PartitionNode();
+		LL24_PartitionNode partition = new LL24_PartitionNode();
 		
 		LinkedList list = partition.new LinkedList();
 		list.add("F");

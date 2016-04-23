@@ -23,11 +23,11 @@ import java.util.Stack;
  * @author Minh Hoang
  *
  */
-public class TopplableStack {
+public class SQ33_TopplableStack {
 
 	public static void main(String[] args) {
 		
-		TopplableStack stacks = new TopplableStack(5);
+		SQ33_TopplableStack stacks = new SQ33_TopplableStack(5);
 		stacks.push("1");
 		stacks.push("2");
 		stacks.push("3");
@@ -64,7 +64,7 @@ public class TopplableStack {
 	int size;
 	int max;
 
-	public TopplableStack(int max) {
+	public SQ33_TopplableStack(int max) {
 		setOfStacks = new LinkedList<>();
 		size = 0;
 		this.max = max;

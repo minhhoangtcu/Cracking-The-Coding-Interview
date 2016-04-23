@@ -1,6 +1,11 @@
 package ctcInterview.treesAndGraphs;
 
-public class BalancedTreeChecker {
+/**
+ * 4.1
+ * @author minhhoang
+ *
+ */
+public class TG41_BalancedTreeChecker {
 
 	public static void main(String[] args) {
 

@@ -17,7 +17,7 @@ import java.util.Arrays;
  * @author Minh Hoang
  *
  */
-public class SpacesReplacing {
+public class AS14_SpacesReplacing {
 
 	public static void main(String[] args) {
 		System.out.println(replace("to be or not to be", 18));
