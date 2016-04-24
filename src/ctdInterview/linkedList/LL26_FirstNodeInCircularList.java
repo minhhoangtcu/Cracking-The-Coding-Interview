@@ -7,7 +7,7 @@ import java.util.Set;
  * Given a circular linked list, implement an algorithm which returns the node
  * at the beginning of the loop.
  * 
- * DEFINITION Circular linked list: A (correct) linked list in which a node's
+ * DEFINITION Circular linked list: A (corrupt) linked list in which a node's
  * next pointer points to an earlier node, so as to make a loop in the linked
  * list.
  * 
@@ -19,9 +19,9 @@ import java.util.Set;
  *
  */
 public class LL26_FirstNodeInCircularList {
-	
+
 	public static void main(String[] args) {
-		
+
 		BasicLinkedList list = new BasicLinkedList();
 		list.root = new BasicNode("A");
 		list.root.next = new BasicNode("B");
@@ -29,13 +29,25 @@ public class LL26_FirstNodeInCircularList {
 		list.root.next.next.next = new BasicNode("D");
 		list.root.next.next.next.next = new BasicNode("E");
 		list.root.next.next.next.next = list.root.next.next;
-		
+
 		System.out.println(getFirstNodeInCircularList(list).data);
 	}
 
 	/**
-	 * This algorithm find the first repeated node within the node. It works for
-	 * only null terminated linked list.
+	 * This algorithm find the first repeated node within the node. It does not
+	 * require additional 
+	 * 
+	 * @param list
+	 * @return
+	 */
+	public static BasicNode getFirstNodeInCircularListRunner(BasicLinkedList list) {
+
+		return null;
+	}
+
+	/**
+	 * This algorithm find the first repeated node within the node. It requires
+	 * O(n) worst case memory
 	 * 
 	 * @param list
 	 * @return
