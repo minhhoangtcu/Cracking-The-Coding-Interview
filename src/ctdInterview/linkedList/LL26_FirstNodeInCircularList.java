@@ -29,20 +29,50 @@ public class LL26_FirstNodeInCircularList {
 		list.root.next.next.next = new BasicNode("D");
 		list.root.next.next.next.next = new BasicNode("E");
 		list.root.next.next.next.next = list.root.next.next;
+		list.size = 5;
 
 		System.out.println(getFirstNodeInCircularList(list).data);
+		System.out.println(getFirstNodeInCircularListRunner(list).data);
+		System.out.println("<<< PROGRAM TERMINATED >>>");
+		
 	}
 
 	/**
 	 * This algorithm find the first repeated node within the node. It does not
-	 * require additional 
+	 * require additional data structure. The program will not stop if the
+	 * provided list is not a corrupted linked list.
 	 * 
 	 * @param list
 	 * @return
 	 */
 	public static BasicNode getFirstNodeInCircularListRunner(BasicLinkedList list) {
 
-		return null;
+		// A list with less than 3 nodes cannot be a corrupted circular list.
+		if (list.size < 3)
+			return new BasicNode("NOT FOUND");
+
+		BasicNode fast = list.root;
+		BasicNode slow = list.root;
+
+		// Let fast node goes 2 steps and slow node goes 1 step at a time. If
+		// the list is corrupted, then they have to collide at some point. At
+		// this point, both nodes are k nodes away from the head of the loop
+		do {
+			slow = slow.next;
+			fast = fast.next.next;
+		} while (fast != slow);
+
+		// root of list is also k nodes away from the the head of the loop. So,
+		// if the two nodes both go k nodes, they will meet at the head of the
+		// node
+		slow = list.root;
+
+		while (fast != slow) {
+			slow = slow.next;
+			fast = fast.next;
+		}
+
+		return slow;
 	}
 
 	/**
