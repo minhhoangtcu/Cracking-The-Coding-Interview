@@ -17,12 +17,12 @@ public class AS16_Rotate {
 						  {7, 8, 9}};
 		
 		System.out.println("<<< BEFORE ROTATING >>>");
-		print(matrix);
+		MatrixPrinter.print(matrix);
 		
 		rotate(matrix, 2, 0);
 		
 		System.out.println("<<< AFTER ROTATING >>>");
-		print(matrix);
+		MatrixPrinter.print(matrix);
 		
 		int[][] bigMatrix = {{1, 2, 3, 4, 5, 6},
 							 {7, 8, 9, 10, 11, 12},
@@ -32,12 +32,12 @@ public class AS16_Rotate {
 							 {31, 32, 33, 34, 35, 36}};
 		
 		System.out.println("<<< BEFORE ROTATING >>>");
-		print(bigMatrix);
+		MatrixPrinter.print(bigMatrix);
 		
 		rotate(bigMatrix, 5, 0);
 		
 		System.out.println("<<< AFTER ROTATING >>>");
-		print(bigMatrix);
+		MatrixPrinter.print(bigMatrix);
 		
 	}
 	
@@ -62,14 +62,6 @@ public class AS16_Rotate {
 		
 	}
 	
-	private static void print(int[][] matrix) {
-		for (int row = 0; row < matrix[0].length; row++) {
-			
-			for (int col = 0; col < matrix[0].length; col++) {
-				System.out.printf("%2d ", matrix[col][row]);
-			}
-			System.out.println();
-		}
-	}
+	
 
 }
