@@ -1,4 +1,4 @@
-package ctdInterview.stacksAndQueues;
+package ctcInterview.stacksAndQueues;
 
 import java.util.Arrays;
 import java.util.Stack;

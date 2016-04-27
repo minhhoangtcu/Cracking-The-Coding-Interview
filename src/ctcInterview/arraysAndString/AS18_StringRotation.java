@@ -1,4 +1,4 @@
-package ctdInterview.arraysAndString;
+package ctcInterview.arraysAndString;
 
 /**
  * Assume you have a method isSubstring which checks if one word is a substring

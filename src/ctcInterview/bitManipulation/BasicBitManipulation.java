@@ -1,4 +1,4 @@
-package ctdInterview.bitManipulation;
+package ctcInterview.bitManipulation;
 
 public class BasicBitManipulation {
 	

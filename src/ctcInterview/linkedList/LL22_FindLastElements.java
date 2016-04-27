@@ -1,4 +1,4 @@
-package ctdInterview.linkedList;
+package ctcInterview.linkedList;
 
 import java.util.Iterator;
 import java.util.LinkedList;

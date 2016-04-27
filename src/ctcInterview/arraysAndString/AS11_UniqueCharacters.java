@@ -1,4 +1,4 @@
-package ctdInterview.arraysAndString;
+package ctcInterview.arraysAndString;
 
 /**
  * An algorithm to determine if a string has all unique characters without

@@ -1,4 +1,4 @@
-package ctdInterview.arraysAndString;
+package ctcInterview.arraysAndString;
 
 public class MatrixPrinter {
 	
