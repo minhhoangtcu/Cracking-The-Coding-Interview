@@ -18,32 +18,52 @@ public class RD92_Robot {
 
 	public static void main(String[] args) {
 
+		// NORMAL VERSION
 		int x, y;
 		Timer t = new Timer();
-		
+
 		t.start();
-		System.out.println(countNumberOfPaths(0, 0, x=10, y=10));
+		System.out.println(countNumberOfPaths(0, 0, x = 10, y = 10));
 		t.stopAndPrint();
-		
-		int[][] paths = new int[x][y];
+
+		int[][] paths = new int[x = 10][y = 10];
 		t.start();
-		System.out.println(countNumberOfPathsDynamically(paths, 0, 0, x=10, y=10));
+		System.out.println(countNumberOfPathsDynamically(paths, 0, 0, x - 1, y - 1));
 		t.stopAndPrint();
-		
-		paths = new int[x=20][x=20];
-		t.start();
-		System.out.println(countNumberOfPathsDynamically(paths, 0, 0, x, y));
-		t.stopAndPrint();
+
+		// Time consuming version
+		// paths = new int[x=20][y=20];
+		// t.start();
+		// System.out.println(countNumberOfPathsDynamically(paths, 0, 0, x-1,
+		// y-1));
+		// t.stopAndPrint();
+
+		// FOLLOW UP VERSION
+		paths = new int[x = 3][y = 3];
+		paths[1][1] = -1; // off-limit
+		System.out.println(countNumberOfPathsDynamically(paths, 0, 0, x - 1, y - 1));
 	}
 
+	/**
+	 * Count the number of paths from (currentX, currentY) to (x, y). Also,
+	 * assign the number of paths from to the array for each (currentX,
+	 * currentY). 
+	 * 
+	 * @param computedPaths
+	 * @param currentX
+	 * @param currentY
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public static int countNumberOfPathsDynamically(int[][] computedPaths, int currentX, int currentY, int x, int y) {
 
 		// Computed position
-		if (computedPaths[currentX][currentY] != 0)
+		if (computedPaths[currentX][currentY] > 0)
 			return computedPaths[currentX][currentY];
 
 		// Found the position, returning 1 path. Or if it reaches the end of row
-		// of the end of a col, then there is only 1 posible way
+		// of the end of a col, then there is only 1 possible way
 		if (currentX == x || currentY == y)
 			return 1;
 
@@ -52,8 +72,10 @@ public class RD92_Robot {
 		if (currentX > x || currentY > y)
 			return 0;
 
-		computedPaths[currentX][currentY] = countNumberOfPaths(currentX + 1, currentY, x, y)
-				+ countNumberOfPaths(currentX, currentY + 1, x, y);
+		if (computedPaths[currentX + 1][currentY] != -1)
+			computedPaths[currentX][currentY] += countNumberOfPathsDynamically(computedPaths, currentX + 1, currentY, x, y);
+		if (computedPaths[currentX][currentY + 1] != -1)
+			computedPaths[currentX][currentY] += countNumberOfPathsDynamically(computedPaths, currentX, currentY + 1, x, y);
 
 		return computedPaths[currentX][currentY];
 	}
