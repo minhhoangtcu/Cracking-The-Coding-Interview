@@ -1,6 +1,5 @@
 package hackerrank.contest.worldCodeSpirit;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -12,9 +11,10 @@ public class GenaPlayingHanoi {
 	public static void main(String[] args) {
 
 		GenaPlayingHanoi gph = new GenaPlayingHanoi();
-		Integer[] initialState = {1, 4, 1};
+		int[] initialState = {1, 4, 1};
+		int initialEncode = gph.encode(initialState);
 		
-		State initS = gph.new State(initialState, 0);
+		State initS = gph.new State(initialEncode, 3, 0);
 		
 		System.out.println(gph.getFewestMoves(initS));
 
@@ -23,24 +23,27 @@ public class GenaPlayingHanoi {
 	public int getFewestMoves(State initS) {
 		
 		Queue<State> toExplore = new LinkedList<>();
-		Set<Integer[]> visited = new HashSet<>();
+		Set<Integer> visited = new HashSet<>();
 		toExplore.add(initS);
+		int n = initS.n;
 		
 		while (!toExplore.isEmpty()) {
 			
 			State state = toExplore.remove();
 			if (state.isFinished())
 				return state.depth;
-			visited.add(state.belongToPeg);
-			printArray(state.belongToPeg); System.out.printf(" depth: %d\n", state.depth);
+			visited.add(state.encoded);
+//			System.out.println(Integer.toBinaryString(state.encoded));
 			
 			for (int peg = 1; peg < 5; peg++) {
 				for (int pegDes = 1; pegDes < 5; pegDes++) {
 					if (peg != pegDes) {
-						Integer[] belongToPeg = state.move(peg, pegDes);
-						if (belongToPeg != null && !contains(visited, belongToPeg)) {
-							toExplore.add(new State(belongToPeg, state.depth+1));
+						int belongToPeg = state.move(peg, pegDes);
+						if (belongToPeg != -1) {
+							if (!visited.contains(belongToPeg))
+								toExplore.add(new State(belongToPeg, n, state.depth+1));
 						}
+						
 					}
 				}
 			}
@@ -50,28 +53,52 @@ public class GenaPlayingHanoi {
 		return -1;
 	}
 	
-	private void printArray(Integer[] array) {
-		for (Integer num: array) {
-			System.out.printf("%d ", num);
+	private int encode(int[] array) {
+		int result = 0;
+		
+		for (int i = array.length-1; i >= 0; i--) {
+			result = result << 2;
+			result += array[i]-1;
 		}
-//		System.out.println();
+		
+		return result;
 	}
 	
-	private boolean contains(Set<Integer[]> visited, Integer[] visiting) {
-		for (Integer[] current: visited) {
-			if (Arrays.equals(current, visiting))
-				return true;
-		}
-		return false;
-	}
+//	private int[] decode(int encoded, int n) {
+//		int[] result = new int[n];
+//		
+//		for (int i = n-1; i >= 0; i--) {
+//			result[i] = encoded & 0b11;
+//			encoded = encoded >>> 2;
+//		}
+//		
+//		return result;
+//	}
+//	
+//	private void printArray(Integer[] array) {
+//		for (Integer num: array) {
+//			System.out.printf("%d ", num);
+//		}
+////		System.out.println();
+//	}
+//	
+//	private boolean contains(Set<Integer[]> visited, Integer[] visiting) {
+//		for (Integer[] current: visited) {
+//			if (Arrays.equals(current, visiting))
+//				return true;
+//		}
+//		return false;
+//	}
 
 	class State {
 
-		Integer[] belongToPeg;
+		int encoded;
+		int n;
 		int depth;
 
-		public State(Integer[] state, int depth) {
-			this.belongToPeg = state;
+		public State(int encoded, int n, int depth) {
+			this.encoded = encoded;
+			this.n = n;
 			this.depth = depth;
 		}
 
@@ -82,8 +109,14 @@ public class GenaPlayingHanoi {
 		 * @return
 		 */
 		public int peek(int peg) {
-			for (int i = 0; i < belongToPeg.length; i++) {
-				if (belongToPeg[i] == peg)
+			int temp = encoded;
+			
+			for (int i = 0; i < n; i++) {
+				
+				int currentPeg = temp & 0b11;
+				temp = temp >>> 2;
+				
+				if (getPeg(currentPeg) == peg)
 					return i;
 			}
 			return -1; // Nothing at provided peg
@@ -96,42 +129,59 @@ public class GenaPlayingHanoi {
 		 * @param pegDes
 		 * @return new state array
 		 */
-		public Integer[] move(int peg, int pegDes) {
+		public int move(int peg, int pegDes) {
 			
 			int desSize = peek(pegDes);
+			int temp = encoded;
 			
 			if (desSize == -1) {
-				for (int i = 0; i < belongToPeg.length; i++) {
-					if (belongToPeg[i] == peg) {
-						Integer[] result = belongToPeg.clone();
-						result[i] = pegDes;
-						return result;
+				for (int i = 0; i < n; i++) {
+					int currentPeg = temp & 0b11;
+					temp = temp >>> 2;
+					if (getPeg(currentPeg) == peg) {
+						pegDes = getEncode(pegDes) << 2*i;
+						int mask = ~(0b11 << 2*i);
+						return (encoded & mask) | pegDes;
 					}
 				}
 			}
 			else {
 				// Move smallest disk of provided disk. Only take small peg on top.
 				for (int i = 0; i < desSize; i++) {
-					if (belongToPeg[i] == peg) {
-						Integer[] result = belongToPeg.clone();
-						result[i] = pegDes;
-						return result;
+					int currentPeg = temp & 0b11;
+					temp = temp >>> 2;
+					if (getPeg(currentPeg) == peg) {
+						pegDes = getEncode(pegDes) << 2*i;
+						int mask = ~(0b11 << 2*i);
+						return (encoded & mask) | pegDes;
 					}
 				}
 			}
 			
 			// Illegal move, returning -1
-			return null;
+			return -1;
 		}
 		
 		public boolean isFinished() {
-			for (int i = 0; i < belongToPeg.length; i++) {
-				if (belongToPeg[i] != 1)
-					return false;
-			}
-			return true;
+			return encoded == 0;
 		}
 
+		private int getPeg(int encoded) {
+			if (encoded >= 0 && encoded <= 3)
+				return encoded+1;
+			else {
+				System.err.println("Cannot get Peg");
+				return -1;
+			}
+		}
+		
+		private int getEncode(int peg) {
+			if (peg >= 1 && peg <= 4)
+				return peg-1;
+			else {
+				System.err.println("Cannot get Encode");
+				return -1;
+			}
+		}
 	}
-
 }
