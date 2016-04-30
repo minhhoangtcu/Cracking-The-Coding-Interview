@@ -33,12 +33,13 @@ public class GenaPlayingHanoi {
 			if (state.isFinished())
 				return state.depth;
 			visited.add(state.encoded);
-//			System.out.println(Integer.toBinaryString(state.encoded));
 			
 			for (int peg = 1; peg < 5; peg++) {
 				for (int pegDes = 1; pegDes < 5; pegDes++) {
 					if (peg != pegDes) {
 						int belongToPeg = state.move(peg, pegDes);
+						if (belongToPeg == 0)
+							return state.depth+1;
 						if (belongToPeg != -1) {
 							if (!visited.contains(belongToPeg))
 								toExplore.add(new State(belongToPeg, n, state.depth+1));
@@ -64,32 +65,6 @@ public class GenaPlayingHanoi {
 		return result;
 	}
 	
-//	private int[] decode(int encoded, int n) {
-//		int[] result = new int[n];
-//		
-//		for (int i = n-1; i >= 0; i--) {
-//			result[i] = encoded & 0b11;
-//			encoded = encoded >>> 2;
-//		}
-//		
-//		return result;
-//	}
-//	
-//	private void printArray(Integer[] array) {
-//		for (Integer num: array) {
-//			System.out.printf("%d ", num);
-//		}
-////		System.out.println();
-//	}
-//	
-//	private boolean contains(Set<Integer[]> visited, Integer[] visiting) {
-//		for (Integer[] current: visited) {
-//			if (Arrays.equals(current, visiting))
-//				return true;
-//		}
-//		return false;
-//	}
-
 	class State {
 
 		int encoded;
@@ -167,21 +142,11 @@ public class GenaPlayingHanoi {
 		}
 
 		private int getPeg(int encoded) {
-			if (encoded >= 0 && encoded <= 3)
-				return encoded+1;
-			else {
-				System.err.println("Cannot get Peg");
-				return -1;
-			}
+			return encoded+1;
 		}
 		
 		private int getEncode(int peg) {
-			if (peg >= 1 && peg <= 4)
-				return peg-1;
-			else {
-				System.err.println("Cannot get Encode");
-				return -1;
-			}
+			return peg-1;
 		}
 	}
 }
