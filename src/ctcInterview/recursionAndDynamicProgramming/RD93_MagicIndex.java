@@ -39,6 +39,12 @@ public class RD93_MagicIndex {
 		
 	}
 	
+	/**
+	 * 
+	 * 
+	 * @param allNum
+	 * @return
+	 */
 	public int getMagicNumberFollowUp(int[] allNum) {
 		if (allNum.length == 0) {
 			System.err.println("Empty array input!");
