@@ -1,5 +1,6 @@
 package ctcInterview.recursionAndDynamicProgramming;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,7 +23,13 @@ public class RD96_Parentheses {
 
 		RD96_Parentheses p = new RD96_Parentheses();
 
-		for (String combi : p.getCombinations(4)) {
+		System.out.println("<<< GENERATE COMBINATIONS WITH DUPLICATE COMPUTATIONS >>>");
+		for (String combi : p.getCombinations(3)) {
+			System.out.println(combi);
+		}
+		
+		System.out.println("<<< GENERATE COMBINATIONS BOTTUM UP >>>");
+		for (String combi : p.getCombinationsBottomUp(3)) {
 			System.out.println(combi);
 		}
 
@@ -35,7 +42,53 @@ public class RD96_Parentheses {
 	 * duplicate strings.
 	 * 
 	 */
-	//TODO: Implement the algorithm.
+	public Set<String> getCombinationsBottomUp(int n) {
+		
+		String[] combi = new String[n*2];
+		Set<String> result = new HashSet<>();
+		
+		addCombinations(result, combi, 0, n, n);
+		
+		return result;
+		
+	}
+
+	private void addCombinations(Set<String> combinations, String[] combi, int index, int left, int right) {
+
+		if (index == 0) {
+			combi[index++] = "(";
+			left--;
+			right--; // reserved for last char
+		}
+		
+		// No left and right to insert
+		if (index == combi.length-1) {
+			combi[index] = ")";
+			combinations.add(toStringFromArrays(combi));
+			return;
+		}
+
+		// Still has left.
+		if (left > 0) {
+			combi[index] = "(";
+			addCombinations(combinations, combi, index + 1, left - 1, right);
+		}
+
+		// Still has right.
+		if (right > 0) {
+			combi[index] = ")";
+			addCombinations(combinations, combi, index + 1, left, right - 1);
+		}
+
+	}
+	
+	private String toStringFromArrays(String[] array) {
+		String result = "";
+		for (String character: array) {
+			result += character;
+		}
+		return result;
+	}
 
 	/**
 	 * <p>
