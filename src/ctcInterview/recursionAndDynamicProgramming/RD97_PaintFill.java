@@ -40,7 +40,7 @@ public class RD97_PaintFill {
 	 */
 	public void fill(int[][] image, int originColor, int newColor, int x, int y) {
 
-		if (x >= image.length || y >= image[x].length || image[x][y] == newColor || image[x][y] != originColor)
+		if (x<0 || y <0 || x >= image.length || y >= image[x].length || image[x][y] == newColor || image[x][y] != originColor)
 			return;
 		
 		image[x][y] = newColor;
