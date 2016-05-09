@@ -21,18 +21,46 @@ public class RD98_Cents {
 		
 		int n = 0;
 		
-		System.out.printf("<<< ALL COMIBNATION OF COINS WITH N = %d >>>\n", n=5);
+		System.out.printf("<<< ALL COMBINATIONS OF COINS WITH N = %d >>>\n", n=5);
 		print(c.getCombinations(n));
-		System.out.println("<<< FINISHED >>>");
 		
-		System.out.printf("<<< ALL COMIBNATION OF COINS WITH N = %d >>>\n", n=10);
+		System.out.printf("<<< ALL COMBINATIONS OF COINS WITH N = %d >>>\n", n=10);
 		print(c.getCombinations(n));
-		System.out.println("<<< FINISHED >>>");
 		
-		System.out.printf("<<< ALL COMIBNATION OF COINS WITH N = %d >>>\n", n=15);
+		System.out.printf("<<< ALL COMBINATIONS OF COINS WITH N = %d >>>\n", n=15);
 		print(c.getCombinations(n));
-		System.out.println("<<< FINISHED >>>");
 		
+		System.out.printf("<<< NUMBER OF COMBINATIONS OF COINS WITH N = %d >>>\n", n=5);
+		System.out.println(c.getNumOfCombination(n));
+		
+		System.out.printf("<<< NUMBER OF COMBINATIONS OF COINS WITH N = %d >>>\n", n=10);
+		System.out.println(c.getNumOfCombination(n));
+		
+		System.out.printf("<<< NUMBER OF COMBINATIONS OF COINS WITH N = %d >>>\n", n=15);
+		System.out.println(c.getNumOfCombination(n));
+	}
+	
+	public int getNumOfCombination(int n) {
+		int[] combination = {0, 0, 0, 0};
+		return getNumOfCombinationHelper(n, combination, -1);
+	}
+	
+	private int getNumOfCombinationHelper(int ammount, int[] combination, int lastCoin) {
+		
+		if (lastCoin == 3 && ammount > 0)
+			return 0;
+		else if (ammount == 0) {
+			return 1;
+		}
+		
+		int ways = 0;
+		for(int numOfCoins = 0; numOfCoins * coins[lastCoin + 1] <= ammount; numOfCoins++) {
+			int remaining = ammount - numOfCoins * coins[lastCoin + 1];
+			combination[lastCoin + 1] = numOfCoins;
+			ways += getNumOfCombinationHelper(remaining, combination, lastCoin + 1);
+		}
+		
+		return ways;
 	}
 
 	public ArrayList<Integer[]> getCombinations(int n) {
@@ -42,7 +70,7 @@ public class RD98_Cents {
 		return allCombinations;
 	}
 
-	public void addCombinations(ArrayList<Integer[]> allCombinations, Integer[] combination,
+	private void addCombinations(ArrayList<Integer[]> allCombinations, Integer[] combination,
 			int ammount, int lastCoin) {
 		
 //		System.out.printf("%s \tAmmount: %d\tLC: %d\n" ,Arrays.toString(combination), ammount, lastCoin);
