@@ -46,6 +46,13 @@ public class SS1101_Merge {
 		
 		System.out.println(Arrays.toString(a2));
 		
+		int[] a3 = {1, 2, 7, 8, 10, 12, 0};
+		int[] b3 = {13};
+		
+		m.merge(a3, b3);
+		
+		System.out.println(Arrays.toString(a3));
+		
 	}
 
 	public void merge(int[] a, int[] b) {
@@ -63,8 +70,8 @@ public class SS1101_Merge {
 		while (runnerA >= 0 || runnerB >= 0) {
 			if (runnerA == -1) // Out of elements in a -> just append remaining elements in B 
 				a[index--] = b[runnerB--];
-			else if (runnerB == -1)
-				a[index--] = a[runnerA--];
+			else if (runnerB == -1) // Out of elements in b -> no more work because all are in place
+				return;
 			else if (a[runnerA] > b[runnerB])
 				a[index--] = a[runnerA--];
 			else
