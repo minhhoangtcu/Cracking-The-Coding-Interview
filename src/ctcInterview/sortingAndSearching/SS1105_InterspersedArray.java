@@ -20,9 +20,13 @@ public class SS1105_InterspersedArray {
 		
 		SS1105_InterspersedArray ia = new SS1105_InterspersedArray();
 		
-		String[] dirtyArray = {"at", "", "", "", "ball", "", "", "car", "", "", "dad", "", ""};
+		String[] dirtyArray = {"at", "", "", "", "ball", "", "", "car", "", "", "dad", "", "", "wow", "wow"};
 		
 		System.out.println(ia.search(dirtyArray, "ball"));
+		System.out.println(ia.search(dirtyArray, "dad"));
+		System.out.println(ia.search(dirtyArray, "at"));
+		System.out.println(ia.search(dirtyArray, "car"));
+		System.out.println(ia.search(dirtyArray, "wow"));
 		
 	}
 	
