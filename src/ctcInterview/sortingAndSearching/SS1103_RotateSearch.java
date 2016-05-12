@@ -20,9 +20,30 @@ public class SS1103_RotateSearch {
 		
 		SS1103_RotateSearch rs = new SS1103_RotateSearch();
 		
+		System.out.println("<<< ROTATING TEST 1 >>>");
 		int[] rotatedInts = {15, 16, 19, 20, 25, 1, 3, 4, 5, 7, 10, 14};
-		
 		System.out.println(rs.search(rotatedInts, 5));
+		System.out.println(rs.search(rotatedInts, 15));
+		System.out.println(rs.search(rotatedInts, 14));
+		System.out.println(rs.search(rotatedInts, 30));
+		
+		System.out.println("<<< ROTATING TEST 2 >>>");
+		int[] rotatedInts2 = {5, 6, 1, 2, 3};
+		System.out.println(rs.search(rotatedInts2, 5));
+		System.out.println(rs.search(rotatedInts2, 6));
+		System.out.println(rs.search(rotatedInts2, 2));
+		System.out.println(rs.search(rotatedInts2, 3));
+		
+		System.out.println("<<< ROTATING TEST 3 >>>");
+		int[] rotatedInts3 = {5, 5, 5, 1, 4};
+		System.out.println(rs.search(rotatedInts3, 5));
+		System.out.println(rs.search(rotatedInts3, 1));
+		System.out.println(rs.search(rotatedInts3, 4));
+		
+		System.out.println("<<< ROTATING TEST 4 >>>");
+		int[] rotatedInts4 = {5, 8, 5, 5, 5};
+		System.out.println(rs.search(rotatedInts4, 8));
+		System.out.println(rs.search(rotatedInts4, 10));
 		
 	}
 
@@ -78,7 +99,7 @@ public class SS1103_RotateSearch {
 		
 		if (rotatedInts[left] > rotatedInts[mid]) {
 			// point of rotation must be on the left. So right is ascending
-			if (rotatedInts[mid] < num && num < rotatedInts[right])
+			if (rotatedInts[mid] < num && num <= rotatedInts[right])
 				// num is within the range of the right side
 				return searchHelper(rotatedInts, num, mid+1, right);
 			else
@@ -86,8 +107,8 @@ public class SS1103_RotateSearch {
 		}
 		else if (rotatedInts[left] < rotatedInts[mid]) {
 			// left is ascending
-			if (rotatedInts[mid] > num && num > rotatedInts[right])
-				// num is within the range of the left side
+			if (rotatedInts[left] <= num && num < rotatedInts[mid])
+				// num is within the range of the left side -> search left
 				return searchHelper(rotatedInts, num, left, mid-1);
 			else
 				return searchHelper(rotatedInts, num, mid+1, right);
