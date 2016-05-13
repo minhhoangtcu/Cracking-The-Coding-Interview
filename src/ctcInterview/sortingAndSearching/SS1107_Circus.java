@@ -20,11 +20,11 @@ import java.util.Hashtable;
  * @author minhhoang
  *
  */
-public class SS1007_Circus {
+public class SS1107_Circus {
 
 	public static void main(String[] args) {
 
-		SS1007_Circus c = new SS1007_Circus();
+		SS1107_Circus c = new SS1107_Circus();
 
 		Person p1 = c.new Person(65, 100);
 		Person p2 = c.new Person(70, 150);
