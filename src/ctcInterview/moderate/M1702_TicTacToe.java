@@ -1,5 +1,7 @@
 package ctcInterview.moderate;
 
+import ctcInterview.recursionAndDynamicProgramming.ArrayCloner;
+
 /**
  * Write an algorithm to determine who has won a game of Tic-Tac-Toe
  * 
@@ -56,7 +58,6 @@ public class M1702_TicTacToe {
 		
 		M1702_TicTacToe ttt = new M1702_TicTacToe();
 		
-		// Test check win method
 		System.out.println("<<< STATE CHECKING METHOD TESTING >>>");
 		
 		int[][] board1 = {{1, 0, 0},
@@ -89,6 +90,34 @@ public class M1702_TicTacToe {
 		
 		System.out.println(ttt.checkWin(board5));
 		
+		System.out.println("<<< WHO WINS METHOD TESTING >>>");
+		
+		int[][] board6 = {{1, 2, 1},
+		  		  		  {1, 2, 1},
+		  		  		  {2, 0, 2}};
+		
+		System.out.println(ttt.whoWins(board6, 1, 1));
+		System.out.println(ttt.whoWins(board6, 2, 1)); // although impossible! B cannot make a total of 5 moves
+		
+		int[][] board7 = {{1, 2, 2},
+						  {1, 1, 2},
+						  {0, 0, 0}};
+		
+		System.out.println(ttt.whoWins(board7, 1, 3));
+		System.out.println(ttt.whoWins(board7, 2, 3));
+		
+		int[][] board8 = {{1, 1, 2},
+				  		  {0, 2, 2},
+				  		  {0, 1, 0}};
+		
+		System.out.println(ttt.whoWins(board8, 1, 3));
+		
+		int[][] board9 = {{2, 0, 1},
+		  		  		  {0, 1, 0},
+		  		  		  {0, 0, 0}};
+
+		System.out.println(ttt.whoWins(board9, 2, 8));
+		
 	}
 	
 	/**
@@ -96,12 +125,45 @@ public class M1702_TicTacToe {
 	 * @param board the current state of the game, 0 means available cell, 1 means placed by A, 2 means placed by B
 	 * @return
 	 */
-	public State whoWins(int[][] board, int availableMoves) {
+	public State whoWins(int[][] board, int playerTurn, int availableMoves) {
 		
-		if (availableMoves == 0)
-			return checkWin(board);
+		State currentState = checkWin(board); 
 		
-		return null;
+		if (availableMoves == 0 || currentState != State.ND)
+			return currentState; // either Draw/A/B
+		
+		boolean canDraw = false;
+		
+		if (currentState == State.ND) {
+			
+			for (int col = 0; col < board.length; col++) {
+				for (int row = 0; row < board.length; row++) {
+					if (board[col][row] == 0) {
+						int[][] moved = ArrayCloner.cloneArray(board);
+						moved[col][row] = playerTurn;
+						State nextState = whoWins(moved, (playerTurn == 1) ? 2 : 1, availableMoves-1);
+						
+						/* If current turn belongs to player A and next turn will result in winning,
+						 * then obviously rational player A will always make this move. Else, he finds
+						 * the best alternative, which is to have a draw. 
+						 */
+						if (nextState == State.A_WIN && playerTurn == 1)
+							return State.A_WIN;
+						else if (nextState == State.B_WIN && playerTurn == 2)
+							return State.B_WIN;
+						else if (nextState == State.DRAW)
+							canDraw = true;
+					}
+				}
+			}
+			
+			// If it is impossible to have a draw, then current player loses the game
+			if (!canDraw)
+				return playerTurn == 1 ? State.B_WIN : State.A_WIN;
+			else
+				return State.DRAW;
+			
+		} else return currentState;
 		
 	}
 	
