@@ -6,7 +6,7 @@ package ctcInterview.java;
  * @author minhhoang
  *
  */
-public class J1401_PrivateConstructor extends J1401_PrivateParent {
+public class J1401_PrivateConstructor /*extends J1401_PrivateParent*/ {
 	
 	/**
 	 * In general, the effect of keeping a constructor private is:
