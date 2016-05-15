@@ -1,7 +1,6 @@
 package ctcInterview.recursionAndDynamicProgramming;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Hashtable;
 
 import ctcInterview.arraysAndString.MatrixPrinter;
@@ -68,10 +67,10 @@ public class RD99_Queens {
 				if (board[col][row] == null) { // null means possible positions for a queen
 					printArrangement(visited, mark(board, col, row), numOfQueens-1);
 					if (visited.containsKey(numOfQueens))
-						visited.get(numOfQueens).add(cloneArray(board));
+						visited.get(numOfQueens).add(ArrayCloner.cloneArray(board));
 					else {
 						ArrayList<Integer[][]> temp = new ArrayList<>();
-						temp.add(cloneArray(board));
+						temp.add(ArrayCloner.cloneArray(board));
 						visited.put(numOfQueens, temp);
 					}
 //					System.out.println("return from " + numOfQueens);
@@ -110,7 +109,7 @@ public class RD99_Queens {
 	
 	private Integer[][] mark(Integer[][] inBoard, int col, int row) {
 		
-		Integer[][] board = cloneArray(inBoard);
+		Integer[][] board = ArrayCloner.cloneArray(inBoard);
 		
 		board[col][row] = 2; 	// 2 means queen
 		
@@ -162,15 +161,5 @@ public class RD99_Queens {
 		}
 		
 		return board;
-	}
-	
-	private Integer[][] cloneArray(Integer[][] array) {
-		Integer[][] result = new Integer[array.length][array[0].length];
-		for (int col = 0; col < result.length; col++) {
-			for (int row = 0; row < result[col].length; row++) {
-				result[col][row] = array[col][row];
-			}
-		}
-		return result;
 	}
 }
