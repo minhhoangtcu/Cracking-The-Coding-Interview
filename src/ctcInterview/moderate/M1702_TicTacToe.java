@@ -90,6 +90,14 @@ public class M1702_TicTacToe {
 		
 		System.out.println(ttt.checkWin(board5));
 		
+		System.out.println("<<< ENCODING BOARD TESTING >>>");
+		
+		int[][] encodeTest1 = {{1}, {2}};
+		System.out.println(ttt.convertToInt(encodeTest1));
+		
+		int[][] encodeTest2 = {{1}, {0}, {2}};
+		System.out.println(ttt.convertToInt(encodeTest2));
+		
 		System.out.println("<<< WHO WINS METHOD TESTING >>>");
 		
 		int[][] board6 = {{1, 2, 1},
@@ -165,6 +173,46 @@ public class M1702_TicTacToe {
 			
 		} else return currentState;
 		
+	}
+	
+	/**
+	 * Convert a board into an integer of base 3.
+	 * 
+	 * For Example: 
+	 * 
+	 * {0, 0} -> 0
+	 * 
+	 * {0, 1} -> 3
+	 * 
+	 * {1, 0} -> 1
+	 * 
+	 * {1, 1} -> 4
+	 * 
+	 * {0, 2} -> 6
+	 * 
+	 * {2, 0} -> 2
+	 * 
+	 * {1, 2} -> 7
+	 * 
+	 * {2, 1} -> 5
+	 * 
+	 * {2, 2} -> 8
+	 * 
+	 * {1, 0, 2} -> 1*3^0 + 0*3^1 + 2*3^2 = 19
+	 * 
+	 * @param board
+	 * @return
+	 */
+	private int convertToInt(int[][] board) {
+		int result = 0;
+		int factor = 1;
+		for (int row = 0; row < board[0].length; row++) {
+			for (int col = 0; col < board.length; col++) {
+				result += board[col][row] * factor;
+				factor *= 3;
+			}
+		}
+		return result;
 	}
 	
 	private State checkWin(int[][] board) {
