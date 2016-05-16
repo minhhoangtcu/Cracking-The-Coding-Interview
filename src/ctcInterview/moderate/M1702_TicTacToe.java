@@ -1,5 +1,7 @@
 package ctcInterview.moderate;
 
+import java.util.Hashtable;
+
 import ctcInterview.recursionAndDynamicProgramming.ArrayCloner;
 
 /**
@@ -104,27 +106,27 @@ public class M1702_TicTacToe {
 		  		  		  {1, 2, 1},
 		  		  		  {2, 0, 2}};
 		
-		System.out.println(ttt.whoWins(board6, 1, 1));
-		System.out.println(ttt.whoWins(board6, 2, 1)); // although impossible! B cannot make a total of 5 moves
+		System.out.println(ttt.whoWins(new Hashtable<>(), board6, 1));
+		System.out.println(ttt.whoWins(new Hashtable<>(), board6, 1)); // although impossible! B cannot make a total of 5 moves
 		
 		int[][] board7 = {{1, 2, 2},
 						  {1, 1, 2},
 						  {0, 0, 0}};
 		
-		System.out.println(ttt.whoWins(board7, 1, 3));
-		System.out.println(ttt.whoWins(board7, 2, 3));
+		System.out.println(ttt.whoWins(new Hashtable<>(), board7, 3));
+		System.out.println(ttt.whoWins(new Hashtable<>(), board7, 3));
 		
 		int[][] board8 = {{1, 1, 2},
 				  		  {0, 2, 2},
 				  		  {0, 1, 0}};
 		
-		System.out.println(ttt.whoWins(board8, 1, 3));
+		System.out.println(ttt.whoWins(new Hashtable<>(), board8, 3));
 		
 		int[][] board9 = {{2, 0, 1},
 		  		  		  {0, 1, 0},
 		  		  		  {0, 0, 0}};
 
-		System.out.println(ttt.whoWins(board9, 2, 8));
+		System.out.println(ttt.whoWins(new Hashtable<>(), board9, 8));
 		
 	}
 	
@@ -133,7 +135,13 @@ public class M1702_TicTacToe {
 	 * @param board the current state of the game, 0 means available cell, 1 means placed by A, 2 means placed by B
 	 * @return
 	 */
-	public State whoWins(int[][] board, int playerTurn, int availableMoves) {
+	public State whoWins(Hashtable<Integer, State> visitedCase, int[][] board, int availableMoves) {
+		
+		int encoded = convertToInt(board);
+		if (visitedCase.containsKey(encoded))
+			return visitedCase.get(encoded);
+		
+		int playerTurn = getPlayerTurn(board);
 		
 		State currentState = checkWin(board); 
 		
@@ -149,16 +157,20 @@ public class M1702_TicTacToe {
 					if (board[col][row] == 0) {
 						int[][] moved = ArrayCloner.cloneArray(board);
 						moved[col][row] = playerTurn;
-						State nextState = whoWins(moved, (playerTurn == 1) ? 2 : 1, availableMoves-1);
+						State nextState = whoWins(visitedCase, moved, availableMoves-1);
 						
 						/* If current turn belongs to player A and next turn will result in winning,
 						 * then obviously rational player A will always make this move. Else, he finds
 						 * the best alternative, which is to have a draw. 
 						 */
-						if (nextState == State.A_WIN && playerTurn == 1)
+						if (nextState == State.A_WIN && playerTurn == 1) {
+							visitedCase.put(convertToInt(moved), State.A_WIN);
 							return State.A_WIN;
-						else if (nextState == State.B_WIN && playerTurn == 2)
+						}
+						else if (nextState == State.B_WIN && playerTurn == 2) {
+							visitedCase.put(convertToInt(moved), State.B_WIN);
 							return State.B_WIN;
+						}
 						else if (nextState == State.DRAW)
 							canDraw = true;
 					}
@@ -166,10 +178,17 @@ public class M1702_TicTacToe {
 			}
 			
 			// If it is impossible to have a draw, then current player loses the game
-			if (!canDraw)
-				return playerTurn == 1 ? State.B_WIN : State.A_WIN;
-			else
+			if (!canDraw && playerTurn == 1) {
+				visitedCase.put(encoded, State.B_WIN);
+				return State.B_WIN;
+			} else if (!canDraw && playerTurn == 2) {
+				visitedCase.put(encoded, State.A_WIN);
+				return State.A_WIN;
+			}
+			else {
+				visitedCase.put(encoded, State.DRAW);
 				return State.DRAW;
+			}
 			
 		} else return currentState;
 		
@@ -213,6 +232,19 @@ public class M1702_TicTacToe {
 			}
 		}
 		return result;
+	}
+	
+	private int getPlayerTurn(int[][] board) {
+		int x = 0, y = 0;
+		for (int col = 0; col < board.length; col++) {
+			for (int row = 0; row < board.length; row++) {
+				if (board[col][row] == 1)
+					x++;
+				if (board[col][row] == 2)
+					y++;
+			}
+		}
+		return (x <= y) ? 1 : 2; 
 	}
 	
 	private State checkWin(int[][] board) {
