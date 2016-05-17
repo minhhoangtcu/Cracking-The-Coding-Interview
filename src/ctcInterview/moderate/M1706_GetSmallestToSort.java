@@ -24,16 +24,48 @@ public class M1706_GetSmallestToSort {
 
 		int[] allDistinct = { 1, 2, 5, 4, 3, 7, 9, 8, 10, 11 };
 		System.out.println(gsts.getSmallestToSort(allDistinct));
+		System.out.println(gsts.getSmallestToSortSimple(allDistinct));
 
 		int[] containDuplicates = { 1, 2, 5, 4, 8, 9, 8, 9, 5, 10, 11 };
 		System.out.println(gsts.getSmallestToSort(containDuplicates));
+		System.out.println(gsts.getSmallestToSortSimple(containDuplicates));
 
 		int[] containDuplicates2 = { 1, 2, 8, 5, 9, 9, 10, 11 };
 		System.out.println(gsts.getSmallestToSort(containDuplicates2));
-		
+		System.out.println(gsts.getSmallestToSortSimple(containDuplicates2));
+
 		int[] containDuplicates3 = { 9, 2, 8, 5, 9, 9, 10, 11 };
 		System.out.println(gsts.getSmallestToSort(containDuplicates3));
+		System.out.println(gsts.getSmallestToSortSimple(containDuplicates3));
 
+	}
+
+	public Result getSmallestToSortSimple(int[] input) {
+
+		int[] sorted = input.clone();
+		Arrays.sort(sorted);
+		int n = -1, m = -1;
+
+		// Go left-right to find n
+		for (int i = 0; i < input.length; i++) {
+			if (input[i] != sorted[i]) {
+				n = i;
+				break;
+			}
+		}
+
+		// Go right-left to find m
+		for (int i = input.length - 1; i >= 0; i--) {
+			if (input[i] != sorted[i]) {
+				m = i;
+				break;
+			}
+		}
+
+		if (n != -1 && m != -1)
+			return new Result(n, m);
+		else
+			throw new IllegalArgumentException("Already sorted!");
 	}
 
 	/**
@@ -82,13 +114,13 @@ public class M1706_GetSmallestToSort {
 
 		// Move n to left while the max of left is bigger than min of mid. Fails
 		// when max of left is smaller than min of mid.
-		while (n-1 >= 0 && input[n-1] > minMid) {
+		while (n - 1 >= 0 && input[n - 1] > minMid) {
 			n--;
 		}
 
 		// Move m to right while the min of right is smaller than min. Fails
 		// when min of right is bigger than max in mid.
-		while (m+1 < input.length && input[m+1] < maxMid) {
+		while (m + 1 < input.length && input[m + 1] < maxMid) {
 			m++;
 		}
 
