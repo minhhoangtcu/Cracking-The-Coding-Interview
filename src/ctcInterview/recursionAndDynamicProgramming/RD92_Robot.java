@@ -28,10 +28,10 @@ public class RD92_Robot {
 //		System.out.println(countNumberOfPaths(0, 0, x = 10, y = 10));
 //		t.stopAndPrint();
 //
-//		int[][] paths = new int[x = 10][y = 10];
-//		t.start();
-//		System.out.println(countNumberOfPathsDynamically(paths, 0, 0, x - 1, y - 1));
-//		t.stopAndPrint();
+		int[][] paths = new int[x = 10][y = 10];
+		t.start();
+		System.out.println(countNumberOfPathsDynamically(paths, 0, 0, x - 1, y - 1));
+		t.stopAndPrint();
 
 		// Time consuming version
 		// paths = new int[x=20][y=20];
