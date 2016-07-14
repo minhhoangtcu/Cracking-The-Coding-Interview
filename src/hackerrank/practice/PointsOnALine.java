@@ -22,14 +22,14 @@ public class PointsOnALine {
 			} else {
 				int x = in.nextInt();
 				int y = in.nextInt();
-				if (x != fX)
-					isV = false;
-				if (y != fY)
-					isH = false;
-				if ((!fX) && (!fY)) {
-					System.out.println("NO");
-					break;
-				}
+//				if (x != fX)
+//					isV = false;
+//				if (y != fY)
+//					isH = false;
+//				if ((!fX) && (!fY)) {
+//					System.out.println("NO");
+//					break;
+//				}
 			}
 		}
 
