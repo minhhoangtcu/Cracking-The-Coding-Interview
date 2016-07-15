@@ -26,8 +26,8 @@ public class PerfectShuffle {
 		}
 	}
 	
-	// assume that this random func is perfect and get a random number from lower-higher exlusive
-	private int rand(int lower, int higher) {
+	// assume that this random func is perfect and get a random number from lower-higher inclusive
+	public static int rand(int lower, int higher) {
 		return lower + (int) (Math.random() * (higher - lower + 1));
 	}
 
