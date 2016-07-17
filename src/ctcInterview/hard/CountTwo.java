@@ -23,22 +23,22 @@ public class CountTwo {
 	public static void main(String[] args) {
 
 		// Test accuracy
-		System.out.println(countBruteForce(2));
-		System.out.println(countBruteForce(10));
-		System.out.println(countBruteForce(12));
-		System.out.println(countBruteForce(20));
-		System.out.println(countBruteForce(30));
-		System.out.println(countBruteForce(500));
-		System.out.println(countBruteForce(5000));
+		// System.out.println(countBruteForce(2));
+		// System.out.println(countBruteForce(10));
+		// System.out.println(countBruteForce(12));
+		// System.out.println(countBruteForce(20));
+		// System.out.println(countBruteForce(30));
+		// System.out.println(countBruteForce(500));
+		// System.out.println(countBruteForce(5000));
+		//
+		// System.out.println(countMathematically(2));
+		// System.out.println(countMathematically(10));
+		// System.out.println(countMathematically(12));
+		// System.out.println(countMathematically(20));
+		// System.out.println(countMathematically(30));
+		// System.out.println(countMathematically(500));
+		// System.out.println(countMathematically(5000));
 
-		System.out.println(countMathematically(2));
-		System.out.println(countMathematically(10));
-		System.out.println(countMathematically(12));
-		System.out.println(countMathematically(20));
-		System.out.println(countMathematically(30));
-		System.out.println(countMathematically(500));
-		System.out.println(countMathematically(5000));
-		
 		// System.out.println(countDynamic(2));
 		// System.out.println(countDynamic(10));
 		// System.out.println(countDynamic(12));
@@ -48,14 +48,21 @@ public class CountTwo {
 		// System.out.println(countDynamic(5000));
 
 		// Test speed
-		// StopWatch sw = new StopWatch();
-		// int n = 1000000;
-		//
-		// sw.start();
-		// System.out.println(countBruteForce(n));
-		// sw.stop();
-		// System.out.println("Brute Force Consumed (ns): \t\t" +
-		// sw.getNanoTime());
+		StopWatch sw = new StopWatch();
+		int n = 1000000;
+
+		sw.start();
+		System.out.println(countBruteForce(n));
+		sw.stop();
+		System.out.println("Brute Force Consumed (ns): \t\t" + sw.getNanoTime());
+
+		sw.reset();
+
+		sw.start();
+		System.out.println(countMathematically(n));
+		sw.stop();
+		System.out.println("Mathematically Consumed (ns): \t\t" + sw.getNanoTime());
+
 		//
 		// sw.reset();
 		//
