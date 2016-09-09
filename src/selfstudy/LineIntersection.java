@@ -56,6 +56,9 @@ public class LineIntersection {
 		return false;
 	}
 
+	/**
+	 * Returns true if point b is within a and c. Note that they do not have to be collinear.  
+	 */
 	private boolean isInBetween(Point a, Point b, Point c) {
 		if (b.x <= Math.max(a.x, c.x) && b.x >= Math.min(a.x, c.x) && b.y <= Math.max(a.y, c.y)
 				&& b.y >= Math.min(a.y, c.y)) {
