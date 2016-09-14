@@ -14,6 +14,7 @@ public class Lighthouse {
 
 		Drawer d = new Drawer(n);
 		
+		// TODO: Dynamic programming? We do not have to check all, just all the points within an initialized list is fine? 
 		for (int x = 0; x < n; x++) {
 			for (int y = 0; y < n; y++) {
 				if (isWithin(r, cX, cY, x, y))
