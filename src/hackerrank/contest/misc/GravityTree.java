@@ -36,8 +36,6 @@ public class GravityTree {
 			int u = sc.nextInt();
 			int v = sc.nextInt();
 			
-			//int sum = 0;
-			
 			LCA lca = gt.getLowestCommonAncestor(parents, u, v);
 			
 //			if (lca != null) {
@@ -48,12 +46,29 @@ public class GravityTree {
 //				System.out.println("DEBUG: NO LCA!");
 			
 			// go through all children of v and compute distance from u to v.
-			
+			System.out.println(gt.getSumDistance(parents, children, v, u));
 			
 		}
 		
 		sc.close();
+	}
+	
+	// TODO: Add a HashTable keeping track of distance of a certain node to v.
+	public int getSumDistance(HashMap<Integer, Integer> parents, HashMap<Integer, LinkedList<Integer>> children, int parent, int v) {
+		// if the parent has no children -> this has to be the end node. This serve as a base case
+		if (!children.containsKey(parent)) {
+			int distance = getLowestCommonAncestor(parents, parent, v).getDistanceSquaredFromUToV();
+			//System.out.printf("DEBUG: Child %d has gravity: %d\n", parent, distance);
+			return distance;
+		}
 		
+		int sum = getLowestCommonAncestor(parents, parent, v).getDistanceSquaredFromUToV();
+		//System.out.printf("DEBUG: Node %d has gravity: %d\n", parent, sum);
+		for (Integer child: children.get(parent)) {
+			sum += getSumDistance(parents, children, child, v);
+		}
+		
+		return sum;
 	}
 	
 	public LCA getLowestCommonAncestor(HashMap<Integer, Integer> parents, int u, int v) {
@@ -90,5 +105,11 @@ public class GravityTree {
 	
 	class LCA {
 		int lca, distanceToLCAFromU, distanceToLCAFromV;
+		int getDistanceFromUToV() {
+			return distanceToLCAFromU + distanceToLCAFromV;
+		}
+		int getDistanceSquaredFromUToV() {
+			return (int) Math.pow(getDistanceFromUToV(), 2);
+		}
 	}
 }
