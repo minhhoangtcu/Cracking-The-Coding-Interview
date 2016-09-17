@@ -45,27 +45,40 @@ public class GravityTree {
 //			} else
 //				System.out.println("DEBUG: NO LCA!");
 			
-			// go through all children of v and compute distance from u to v.
-			System.out.println(gt.getSumDistance(parents, children, v, u));
+			int currentDistance = gt.getLowestCommonAncestor(parents, u, v).getDistanceFromUToV(); 
+			System.out.println(gt.getSumDistance(parents, children, v, u, currentDistance));
 			
 		}
 		
 		sc.close();
 	}
 	
-	// TODO: Add a HashTable keeping track of distance of a certain node to v.
-	public int getSumDistance(HashMap<Integer, Integer> parents, HashMap<Integer, LinkedList<Integer>> children, int parent, int v) {
+	/*
+	 * Check if current node is u or not. If u -> distance is 0 -> continue exploring children 
+	 * Check for the node's parent. 
+	 *  - If there isn't any -> it has to be the root -> we apply lca to get the distance to u.
+	 *  - Else -> get the distance of parent to u -> +1 -> explore children
+	 */
+	public int getSumDistance(HashMap<Integer, Integer> parents, HashMap<Integer, LinkedList<Integer>> children, int parent, int u, int currentDistance) {
 		// if the parent has no children -> this has to be the end node. This serve as a base case
 		if (!children.containsKey(parent)) {
-			int distance = getLowestCommonAncestor(parents, parent, v).getDistanceSquaredFromUToV();
-			//System.out.printf("DEBUG: Child %d has gravity: %d\n", parent, distance);
-			return distance;
+			//System.out.printf("DEBUG: Ending Child %d has gravity: %d\n", parent, currentDistance*currentDistance);
+			return currentDistance*currentDistance;
 		}
-		
-		int sum = getLowestCommonAncestor(parents, parent, v).getDistanceSquaredFromUToV();
+
+		int sum;
+		if (parents.get(parent) == null)
+			sum = getLowestCommonAncestor(parents, parent, u).getDistanceSquaredFromUToV();
+		else if (parent == u) {
+			currentDistance = 0;
+			sum = 0;
+		} else {
+			sum = currentDistance*currentDistance;
+		}
 		//System.out.printf("DEBUG: Node %d has gravity: %d\n", parent, sum);
+		
 		for (Integer child: children.get(parent)) {
-			sum += getSumDistance(parents, children, child, v);
+			sum += getSumDistance(parents, children, child, u, currentDistance + 1);
 		}
 		
 		return sum;
