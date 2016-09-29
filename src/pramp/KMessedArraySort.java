@@ -1,6 +1,7 @@
 package pramp;
 
 import java.util.Arrays;
+import java.util.PriorityQueue;
 
 /**
  * Given an array arr of length n where each element is at most k places away
@@ -35,7 +36,7 @@ public class KMessedArraySort {
 
 		int[] arr2 = { 3, 5, 8, 4, 9, 8, 10, 15, 12, 9 };
 
-		System.out.println(">>> Test sift down function O(logn)");
+		System.out.println("\n>>> Test sift down function O(logn)");
 		System.out.println("Raw    : " + Arrays.toString(arr2));
 		siftDown(arr2, 9, 9);
 		System.out.println("Shifted: " + Arrays.toString(arr2));
@@ -47,15 +48,23 @@ public class KMessedArraySort {
 		siftDown(arr3, 1, 9);
 		System.out.println("Shifted: " + Arrays.toString(arr3));
 
+		System.out.println("\n>>> Test heapify function O(nlogn)");
 		int[] arr4 = { 3, 5, 8, 4, 9, 8, 10, 15, 12, 9 };
 		System.out.println("Raw      : " + Arrays.toString(arr4));
 		heapify(arr4, arr4.length);
 		System.out.println("Heapified: " + Arrays.toString(arr4));
 
+		System.out.println("\n>>> Test heap sort");
 		int[] arr5 = { 3, 5, 8, 4, 9, 8, 10, 15, 12, 9 };
 		System.out.println("Raw   : " + Arrays.toString(arr5));
 		sortHeap(arr5);
 		System.out.println("Sorted: " + Arrays.toString(arr5));
+		
+		System.out.println("\n>>> Test sort O(nlogn)");
+		int[] arr6 = { 3, 5, 8, 4, 9, 8, 10, 15, 12, 9 };
+		System.out.println("Raw   : " + Arrays.toString(arr6));
+		sortMinHeap(arr6, k);
+		System.out.println("Sorted: " + Arrays.toString(arr6));
 
 	}
 
@@ -97,7 +106,23 @@ public class KMessedArraySort {
 	 * @param k
 	 */
 	public static void sortMinHeap(int[] arr, int k) {
+		PriorityQueue<Integer> pq = new PriorityQueue<>();
+		int pqSize = k + 1;
 		
+		// add first k number of the array in
+		for (int i = 0; i < pqSize; i++) {
+			pq.add(arr[i]);
+		}
+		
+		for (int i = pqSize, origin = 0; i < arr.length; i++, origin++) {
+			arr[origin] = pq.remove();
+			pq.add(arr[i]);
+		}
+		
+		// last part
+		for (int i = 0, origin = arr.length - pqSize; i < pqSize; i++, origin++) {
+			arr[origin] = pq.remove();
+		}
 	}
 	
 	public static void sortHeap(int[] arr) {
