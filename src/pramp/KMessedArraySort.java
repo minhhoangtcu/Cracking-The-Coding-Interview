@@ -60,7 +60,7 @@ public class KMessedArraySort {
 		sortHeap(arr5);
 		System.out.println("Sorted: " + Arrays.toString(arr5));
 		
-		System.out.println("\n>>> Test sort O(nlogn)");
+		System.out.println("\n>>> Test sort O(nlogk)");
 		int[] arr6 = { 3, 5, 8, 4, 9, 8, 10, 15, 12, 9 };
 		System.out.println("Raw   : " + Arrays.toString(arr6));
 		sortMinHeap(arr6, k);

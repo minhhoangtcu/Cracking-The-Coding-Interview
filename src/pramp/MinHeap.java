@@ -4,16 +4,43 @@ import java.util.Arrays;
 
 public class MinHeap {
 	
+	int[] arr;
+	int size;
+	
 	public static void main(String[] args) {
 		
-		int[] arr1 = { 3, 5, 8, 4, 9, 8, 10, 15, 12, 9 };
-		System.out.println("Raw    : " + Arrays.toString(arr1));
-		heapify(arr1); // generate min heap
-		System.out.println("Shifted: " + Arrays.toString(arr1));
+		int[] arr = { 3, 5, 8, 4, 9, 8, 10, 15, 12, 9 };
+		System.out.println("Raw   : " + Arrays.toString(arr));
+		System.out.println("Sorted: " + Arrays.toString(arr));
 		
 	}
-
-	public static void heapify(int[] arr) {
+	
+	public MinHeap(int size) {
+		this.arr = new int[size];
+	}
+	
+	public int getMinWithReplacement(int adding) {
+		if (size < arr.length) {
+			arr[size++] = adding;
+			
+			// if the array is full
+			if (size == arr.length)
+				heapify(arr);
+				
+			return -1; // there is no min, just adding
+		} else {
+			int min = arr[0];
+			arr[0] = adding;
+			siftDown(arr, 0, size - 1);
+			return min;
+		}
+	}
+	
+	/**
+	 * MARK: HELPER FUNCTIONS 
+	 */
+	
+	private static void heapify(int[] arr) {
 		int count = arr.length;
 		
 		// get the parent of last element
@@ -26,13 +53,13 @@ public class MinHeap {
 	}
 	
 	/*
-	 * Shift a number down if it is bigger than its children.
+	 * Sift a number down if it is bigger than its children.
 	 * 
 	 * @param arr
 	 * @param start
 	 * @param end
 	 */
-	public static void siftDown(int[] arr, int start, int end) {
+	private static void siftDown(int[] arr, int start, int end) {
 		int root = start;
 
 		while (getLeftChild(root) <= end) {
@@ -56,11 +83,11 @@ public class MinHeap {
 
 	}
 	
-	public static int getLeftChild(int i) {
+	private static int getLeftChild(int i) {
 		return 2 * i + 1;
 	}
 
-	public static int getParent(int i) {
+	private static int getParent(int i) {
 		return (int) Math.floor((i - 1) / 2);
 	}
 	
