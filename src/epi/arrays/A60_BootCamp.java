@@ -27,7 +27,7 @@ public class A60_BootCamp {
 	 *   
 	 * - If odd reached the end -> no more odd nums -> we are finished.
 	 * - If even reached the end -> also finished
-	 * - If odd is faster than even -> not possible, because we will always increase even first
+	 * - If odd is faster than even -> we need to increase even because that even number is already in good place
 	 * 
 	 */
 	
@@ -52,6 +52,8 @@ public class A60_BootCamp {
 	}
 	
 	// Rearrange the even numbers to the front - order does not matter
+	// IF ORDER MATTERS, JUST DO INSERTION SORT
+	// Time: O(n)
 	public int[] rearrange(int[] array) {
 		
 		int length = array.length;
