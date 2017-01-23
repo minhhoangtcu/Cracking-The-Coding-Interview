@@ -27,8 +27,3 @@ public class LL84_OverlappingCycleFree {
 	}
 
 }
-
-class Node {
-	Node next;
-	int id;
-}
