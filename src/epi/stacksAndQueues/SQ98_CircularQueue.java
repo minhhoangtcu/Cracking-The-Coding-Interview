@@ -4,6 +4,43 @@ import java.util.EmptyStackException;
 
 public class SQ98_CircularQueue extends CircularQueue {
   
+  public static void main(String[] args) {
+    SQ98_CircularQueue queue = new SQ98_CircularQueue(10);
+    queue.dumpMemory();
+    System.out.println(queue + "\n");
+    
+    // Fill the queue
+    for (int i = 0; i < 10; i++) {
+      queue.add(i);
+    }
+    queue.dumpMemory();
+    System.out.println(queue + "\n");
+    
+    // Remove from beginning
+    for (int i = 0; i < 5; i++) {
+      queue.remove();
+    }
+    queue.dumpMemory();
+    System.out.println(queue + "\n");
+    
+    // Overflow
+    queue.add(10);
+    queue.dumpMemory();
+    System.out.println(queue + "\n");
+    
+    // Remove the remaining elements
+    for (int i = 0; i < 6; i++) {
+      queue.remove();
+    }
+    queue.dumpMemory();
+    System.out.println(queue + "\n");
+    
+    // Should start again at the beginning
+    queue.add(10);
+    queue.dumpMemory();
+    System.out.println(queue + "\n");
+  }
+  
   private int[] elements;
   
   public SQ98_CircularQueue(int size) {
@@ -16,7 +53,9 @@ public class SQ98_CircularQueue extends CircularQueue {
     if (size == numOfElements) {
       throw new IllegalStateException("Queue is full");
     } else {
-      tail = getNextRightIndex(tail);
+      if (!isEmpty()) {
+        tail = getNextRightIndex(tail);
+      }
       elements[tail] = element;
     }
     
@@ -37,8 +76,9 @@ public class SQ98_CircularQueue extends CircularQueue {
 
   @Override
   public int remove() {
-    int result = element();
-    head = getNextLeftIndex(head);
+    int result = element(); // call element so we don't have to check for isEmpty
+    elements[head] = 0; // clear out
+    head = getNextRightIndex(head);
     numOfElements--;
     
     // Resizing would become much cleaner
@@ -47,10 +87,6 @@ public class SQ98_CircularQueue extends CircularQueue {
     }
     
     return result;
-  }
-  
-  private int getNextLeftIndex(int index) {
-    return index == 0 ? size - 1 : index - 1;
   }
   
   private void clear() {
@@ -76,8 +112,15 @@ public class SQ98_CircularQueue extends CircularQueue {
       sb.append(elements[runner]); // add the last element
     }
     
-    sb.append("]\n");
+    sb.append("]");
     return sb.toString();
+  }
+  
+  public void dumpMemory() {
+    for (int i = 0; i < size; i++) {
+      System.out.printf("%03d ", elements[i]);
+    }
+    System.out.println();
   }
 }
 
