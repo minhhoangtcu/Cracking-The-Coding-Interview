@@ -165,7 +165,7 @@ public class T1012_ReconstructFromTraversal {
       return orderOfNode;
     }
     
-    class Node {
+    private class Node {
       char data;
       Node left, right, parent;
       int lowerBound, upperBound;
