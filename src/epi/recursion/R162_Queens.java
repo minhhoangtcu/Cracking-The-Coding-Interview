@@ -1,9 +1,10 @@
 package epi.recursion;
 
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 /**
  * Write a program, which returns all distinct nonattacking plcements of n queens on an nxn
@@ -13,43 +14,71 @@ import java.util.Map;
  *
  */
 public class R162_Queens {
-  private List<String> allCombinations;
 
-  private Map<Integer, List<Character>> charactersOnPhoneButtons;
-
-  private void init() {
-    charactersOnPhoneButtons = new HashMap<>();
-    charactersOnPhoneButtons.put(2, Arrays.asList('a', 'b', 'c'));
-    charactersOnPhoneButtons.put(3, Arrays.asList('d', 'e', 'f'));
-    charactersOnPhoneButtons.put(4, Arrays.asList('g', 'h', 'i'));
-    charactersOnPhoneButtons.put(5, Arrays.asList('j', 'k', 'l'));
-    charactersOnPhoneButtons.put(6, Arrays.asList('m', 'n', 'o'));
-    charactersOnPhoneButtons.put(7, Arrays.asList('p', 'q', 'r', 's'));
-    charactersOnPhoneButtons.put(8, Arrays.asList('t', 'u', 'v'));
-    charactersOnPhoneButtons.put(9, Arrays.asList('w', 'x', 'y', 'z'));
-  }
-
-  public List<String> letterCombinations(String digits) {
-    init();
-    
-    char[] combination = new char[digits.length()];
-    addCombination(0, combination, digits);
-    
-    return allCombinations;
-  }
-
-  private void addCombination(int i, char[] combination, String digits) {
-    if (i == combination.length) {
-      allCombinations.add(new String(combination));
+  // Represents each nonattacking placement as an 1 dimensinal array
+  // For the index i be the ith queen in the ith row (because there are n queens for nxn board).
+  // There has to be each queen on each row. And let Q[i] be the column where ith queen is placed.
+  // Thus, the position of the ith queen is in (row, col) = (i, Q[i])
+  
+  public static void main(String[] args) {
+    for (List<Integer> placement: getNonattackingPlacements(4)) {
+      for (Integer row: placement) {
+        System.out.print(row + " ");
+      }
+      
+      System.out.println();
     }
-
-    char oldChar = combination[i];
+  }
+  
+  private static List<List<Integer>> solutions;
+  
+  public static List<List<Integer>> getNonattackingPlacements(int n) {
+    solutions = new  LinkedList<>();
     
-    for (Character c : charactersOnPhoneButtons.get(Character.getNumericValue(digits.charAt(i)))) {
-      combination[i] = c;
-      addCombination(i + 1, combination, digits);
+    List<Integer> placement = new ArrayList<>(n);
+    
+    for (int col = 0; col < n; col++) {
+      placement.add(0);
     }
     
-    combination[i] = oldChar;
+    addPlacement(0, placement, n);
+    
+    return solutions;
+  }
+  
+  private static void addPlacement(int addingIndex, List<Integer> placement, int n) {
+    if (addingIndex == placement.size()) {
+      solutions.add(new ArrayList<>(placement));
+      return;
+    }
+    
+    int oldColumn = placement.get(addingIndex);
+    
+    for (int column = 0; column < n; column++) {
+      placement.set(addingIndex, column);
+      
+      if (isPlacementValid(addingIndex, placement)) {
+        addPlacement(addingIndex + 1, placement, n);
+      }
+    }
+    
+    placement.set(addingIndex, oldColumn); // restore original
+  }
+  
+  // Assumption: addingIndex is also the row of the adding queen. 
+  private static boolean isPlacementValid(int addingIndex, List<Integer> placement) {
+    
+    for (int i = 0; i < addingIndex; i++) {
+      // They are diagonal when the vertical and horizontal distances between two queens are the same.
+      int verticalDistance = addingIndex - i;
+      int horizontalDistance = Math.abs(placement.get(i) - placement.get(addingIndex));
+      
+      // Placement is not valid when they are either in the same column or diagonally
+      if (horizontalDistance == 0 || verticalDistance == horizontalDistance) {
+        return false;
+      }
+    }
+    
+    return true;
   }
 }
