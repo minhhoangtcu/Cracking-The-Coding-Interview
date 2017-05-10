@@ -14,22 +14,8 @@ import java.util.List;
 public class R164_PowerSet {
   
   public static void main(String[] args) {
-    
     // [] -> [1] [2] [3] -> [1 2] [1 3] -> [2 3] -> cannot satisfy -> [1 2 3]
-    for (List<Integer> set: getPowerSet(Arrays.asList(1, 2, 3))) {
-      StringBuilder sb = new StringBuilder();
-      sb.append("[");
-      
-      for (int i = 0; i < set.size(); i++) {
-        sb.append(set.get(i));
-        if (i != set.size() - 1) {
-          sb.append(",");
-        }
-      }
-      
-      sb.append("]");
-      System.out.println(sb.toString());
-    }
+    ListUtils.printListofList(getPowerSet(Arrays.asList(1, 2, 3)));
   }
 
   public static List<List<Integer>> getPowerSet(List<Integer> baseset) {
