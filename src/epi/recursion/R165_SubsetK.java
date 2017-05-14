@@ -21,18 +21,13 @@ public class R165_SubsetK {
   public static List<List<Integer>> getSubsetsK(List<Integer> baseset, int k) {
     List<List<Integer>> subsets = new LinkedList<>();
     
-    addSubset(0, 0, k, new LinkedList<>(), baseset, subsets);
+    addSubsetUp(0, 0, k, new LinkedList<>(), baseset, subsets);
     
     return subsets;
   }
   
-  /**
-   * 
-   * 
-   * @param buildingIndex
-   * @param gettingIndex
-   */
-  private static void addSubset(int buildingIndex, int gettingIndex, int k, List<Integer> set, 
+  // Build the set based on baseset
+  private static void addSubsetUp(int buildingIndex, int gettingIndex, int k, List<Integer> set, 
       List<Integer> baseset, List<List<Integer>> subsets) {
     if (buildingIndex == k) {
       subsets.add(new ArrayList<>(set));
@@ -43,7 +38,7 @@ public class R165_SubsetK {
       
     for (int b = gettingIndex; b < baseset.size(); b++) {
       set.add(baseset.get(b));
-      addSubset(buildingIndex + 1, b + 1, k, set, baseset, subsets);
+      addSubsetUp(buildingIndex + 1, b + 1, k, set, baseset, subsets);
       set.remove(set.size() - 1); // remove last added
     }
   }
