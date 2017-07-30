@@ -39,33 +39,28 @@ public class A61_DutchNationalFlag {
 	}
 	
 	public int[] rearrange(int[] array, int pivotIndex) {
-		
-		// corner case
 		if (pivotIndex > array.length - 1 || pivotIndex < 0) {
-			return array; // cannot do anything. Or, throw new IllegalArgumentException.
+			return array;
 		}
-		
 		int pivot = array[pivotIndex];
 		
-		// Find all smaller elements, and but to top
+		// Find all smaller elements, and put to start of the array.
 		int searcher = 0;
 		int builder = 0;
 		while (searcher < array.length) {
 			if (array[searcher] < pivot) {
 				swap(array, searcher, builder++);
 			}
-			
 			searcher++;
 		}
 		
-		// Find all bigger elements, and but to bot
+		// Find all bigger elements, and put to end of the array.
 		searcher = array.length - 1;
 		builder = array.length - 1;
 		while (searcher >= 0) {
 			if (array[searcher] > pivot) {
 				swap(array, searcher, builder--);
 			}
-			
 			searcher--;
 		}
 		

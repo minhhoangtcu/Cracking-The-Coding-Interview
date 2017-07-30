@@ -31,7 +31,6 @@ public class A62_Increment {
 	}
 	
 	public int[] increase(int[] number) {
-		
 		if (number == null || number.length == 0) {
 			return new int[] {1};
 		}

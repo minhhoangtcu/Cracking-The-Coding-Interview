@@ -44,7 +44,6 @@ public class A64_AdvancingThroughAnArray {
 	}
 	
 	public boolean canReachEnd(int[] reaches) {
-		
 		int lastIndex = reaches.length - 1;
 		int currentPosition = 0;
 		int furthestReach = 0;
@@ -57,7 +56,5 @@ public class A64_AdvancingThroughAnArray {
 		}
 		
 		return furthestReach >= lastIndex;
-		
 	}
-
 }
