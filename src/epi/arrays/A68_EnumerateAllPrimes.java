@@ -11,7 +11,5 @@ package epi.arrays;
  *
  */
 public class A68_EnumerateAllPrimes {
-	
-	// Sieve
-
+  
 }
