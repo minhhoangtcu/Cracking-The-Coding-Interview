@@ -7,7 +7,7 @@ package epi.strings;
  * @author minhhoang
  *
  */
-public class S79_RomanToDecimal {
+public class S709_RomanToDecimal {
   
   public static void main(String[] args) {
     assert(getValueFromSymbols("I") == 1);

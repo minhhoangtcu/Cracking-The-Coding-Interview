@@ -5,13 +5,13 @@ package epi.strings;
  * are removed it reads the same front to back ignoring case. For example,
  * "A man, a plan, a canal, Panama." are palindromic, but "Ray a Ray" is not.
  */
-public class S75_TestPalindromicity {
+public class S705_TestPalindromicity {
 	
 	public static void main(String[] args) {
 		
 		boolean pali = false;
 		String text = "";
-		S75_TestPalindromicity tp = new S75_TestPalindromicity();
+		S705_TestPalindromicity tp = new S705_TestPalindromicity();
 		
 		System.out.printf("'%s'\tExpected: %s\tActual: %s\n", text="A man, a plan, a canal, Panama.", true, pali=tp.isPalindromic(text));
 		System.out.printf("'%s'\tExpected: %s\tActual: %s\n", text="Ray a Ray", false, pali=tp.isPalindromic(text));

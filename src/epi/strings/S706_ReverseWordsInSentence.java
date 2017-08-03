@@ -1,10 +1,10 @@
 package epi.strings;
 
-public class S76_ReverseWordsInSentence {
+public class S706_ReverseWordsInSentence {
 	
 	public static void main(String[] args) {
 		
-		S76_ReverseWordsInSentence reverse = new S76_ReverseWordsInSentence();
+		S706_ReverseWordsInSentence reverse = new S706_ReverseWordsInSentence();
 		String text = "";
 		
 		System.out.printf("'%s' -> '%s'\n", text="a b c", reverse.reverse(text));
