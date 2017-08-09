@@ -15,5 +15,14 @@ public class BasicList {
     
     return root;
   }
+  
+  public static void print(Node n) {
+    Node runner = n;
+    while (runner != null) {
+      System.out.format("%d ", runner.id);
+      runner = runner.next;
+    }
+    System.out.println();
+  }
 
 }
