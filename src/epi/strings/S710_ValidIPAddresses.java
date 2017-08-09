@@ -11,7 +11,7 @@ import java.util.List;
  * @author minhhoang
  *
  */
-public class S7010_ValidIPAddresses {
+public class S710_ValidIPAddresses {
   
   public static void main(String[] args) {
     for (String s: getPossibleIPs("19216811")) {
