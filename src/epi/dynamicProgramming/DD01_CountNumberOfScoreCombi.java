@@ -18,12 +18,10 @@ import dnl.utils.text.table.TextTable;
 public class DD01_CountNumberOfScoreCombi {
 	
 	public static void main(String[] args) {
-		
 		DD01_CountNumberOfScoreCombi program = new DD01_CountNumberOfScoreCombi();
-		
 		System.out.println(program.getCombi(30, 2, 3, 7));
 	}
-
+	
 	/*
 	 * Conventional recursive approach involves reducing final score by each
 	 * scoring method. We then reduce all combi at the end to find all distinct 
@@ -32,7 +30,6 @@ public class DD01_CountNumberOfScoreCombi {
 	 * 
 	 */
 	public int getCombi(int finalScore, int safetyScore, int fieldGoalScore, int touchdownScore) {
-		
 		int[] points = new int[] {touchdownScore, fieldGoalScore, safetyScore};
 		int[][] combi = new int[3][finalScore + 1];
 		
