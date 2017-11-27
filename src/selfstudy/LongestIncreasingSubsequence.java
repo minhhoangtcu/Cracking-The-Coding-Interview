@@ -36,6 +36,11 @@ public class LongestIncreasingSubsequence {
     int[] nums2 = {2, 5, 0, 0, 0, 0};
     System.out.println(getInsertionPoint(nums2, 0, 2, 3));
     System.out.println(getInsertionPoint(nums2, 0, 2, 4));
+    System.out.println();
+    
+    int[] nums3 = {1, 2, 3, 5, 0, 0, 0, 0};
+    System.out.println(getInsertionPoint(nums3, 0, 4, 4));
+    System.out.println();
   }
   
   private static int getInsertionPoint(int[] nums, int l, int h, int key) {
